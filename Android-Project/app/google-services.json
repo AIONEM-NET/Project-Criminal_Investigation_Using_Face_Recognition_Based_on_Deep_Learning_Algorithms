@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "854442664893",
+    "firebase_url": "https://ai-based-prison-management-default-rtdb.firebaseio.com",
+    "project_id": "ai-based-prison-management",
+    "storage_bucket": "ai-based-prison-management.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:854442664893:android:c0071ea0b882d1336a28d4",
+        "android_client_info": {
+          "package_name": "face.recognition.webcam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "854442664893-hf32ta3evk32hrecqtlnfstkska81j80.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPhtbfdC95TWk9KQMuDCNjKYEgHxdrrWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "854442664893-hf32ta3evk32hrecqtlnfstkska81j80.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

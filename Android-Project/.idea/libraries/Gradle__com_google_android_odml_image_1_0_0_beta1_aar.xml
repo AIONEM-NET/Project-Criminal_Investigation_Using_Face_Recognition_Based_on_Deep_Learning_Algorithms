@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.android.odml:image:1.0.0-beta1@aar">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/7de46db7ff7b0676c193e46de48f868e/transformed/jetified-image-1.0.0-beta1/res" />
+      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/58adf6c9a9c37833d90f9c7b40c28bae/transformed/jetified-image-1.0.0-beta1/res" />
+      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/2ccb9bb5dba1df77afdbfae8b3cf67d1/transformed/jetified-image-1.0.0-beta1/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/2ccb9bb5dba1df77afdbfae8b3cf67d1/transformed/jetified-image-1.0.0-beta1/res" />
+      <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/2ccb9bb5dba1df77afdbfae8b3cf67d1/transformed/jetified-image-1.0.0-beta1/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/modules-2/files-2.1/com.google.android.odml/image/1.0.0-beta1/aa9d23e3124a588104fe600f42af0e192f732599/image-1.0.0-beta1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>
