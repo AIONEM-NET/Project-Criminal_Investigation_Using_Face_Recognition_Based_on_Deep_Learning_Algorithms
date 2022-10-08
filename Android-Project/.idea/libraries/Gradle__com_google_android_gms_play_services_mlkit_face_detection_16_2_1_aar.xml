@@ -1,11 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.gms:play-services-mlkit-face-detection:16.2.1@aar">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/4e23a2587a142a383171703a23e195d4/transformed/jetified-play-services-mlkit-face-detection-16.2.1/res" />
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/10ab8a90e80fa98583ecc2e108c96fde/transformed/jetified-play-services-mlkit-face-detection-16.2.1/res" />
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/481c88bff4c84125af1083d96d95fcf3/transformed/jetified-play-services-mlkit-face-detection-16.2.1/AndroidManifest.xml" />
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/481c88bff4c84125af1083d96d95fcf3/transformed/jetified-play-services-mlkit-face-detection-16.2.1/res" />
       <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/481c88bff4c84125af1083d96d95fcf3/transformed/jetified-play-services-mlkit-face-detection-16.2.1/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/481c88bff4c84125af1083d96d95fcf3/transformed/jetified-play-services-mlkit-face-detection-16.2.1/res" />
+      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/481c88bff4c84125af1083d96d95fcf3/transformed/jetified-play-services-mlkit-face-detection-16.2.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-mlkit-face-detection/16.2.1/28c08c576f0e7a2b6966988da12e36aebd6ccfbf/play-services-mlkit-face-detection-16.2.1-javadoc.jar!/" />

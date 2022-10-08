@@ -1,8 +1,6 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.mlkit:common:17.5.0@aar">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/f1f5897f4893a4d2469e8bad460da48e/transformed/jetified-common-17.5.0/res" />
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/c1618dacd4953f794575806af7855c95/transformed/jetified-common-17.5.0/res" />
       <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/f2f88b8013ff8984ec4b9bbfcb10d2b9/transformed/jetified-common-17.5.0/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/f2f88b8013ff8984ec4b9bbfcb10d2b9/transformed/jetified-common-17.5.0/res" />
       <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/f2f88b8013ff8984ec4b9bbfcb10d2b9/transformed/jetified-common-17.5.0/AndroidManifest.xml" />

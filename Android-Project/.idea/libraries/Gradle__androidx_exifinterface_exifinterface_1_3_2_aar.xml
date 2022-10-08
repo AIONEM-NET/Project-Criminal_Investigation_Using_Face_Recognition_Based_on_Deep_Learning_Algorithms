@@ -4,11 +4,9 @@
       <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/f2883b4a31be3212d53d22bb93430e4c/transformed/exifinterface-1.3.2/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/c1314535a2612a618dcfb07052de3546/transformed/exifinterface-1.3.2/res" />
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/3c6216c885faae4d75c61fa6c9970668/transformed/exifinterface-1.3.2/res" />
       <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/f2883b4a31be3212d53d22bb93430e4c/transformed/exifinterface-1.3.2/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/f2883b4a31be3212d53d22bb93430e4c/transformed/exifinterface-1.3.2/AndroidManifest.xml" />
       <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/f2883b4a31be3212d53d22bb93430e4c/transformed/exifinterface-1.3.2/res" />
+      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/f2883b4a31be3212d53d22bb93430e4c/transformed/exifinterface-1.3.2/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -1,11 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.gms:play-services-auth-base:18.0.1@aar">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/d797068af1be52ce0de7d0c65ad5162e/transformed/jetified-play-services-auth-base-18.0.1/res" />
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/09ec00122ae7bef4e410e2b32fb6111d/transformed/jetified-play-services-auth-base-18.0.1/res" />
+      <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/72adde45e693fdd71119912d93e17e35/transformed/jetified-play-services-auth-base-18.0.1/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/72adde45e693fdd71119912d93e17e35/transformed/jetified-play-services-auth-base-18.0.1/res" />
       <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/72adde45e693fdd71119912d93e17e35/transformed/jetified-play-services-auth-base-18.0.1/AndroidManifest.xml" />
-      <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/72adde45e693fdd71119912d93e17e35/transformed/jetified-play-services-auth-base-18.0.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-auth-base/18.0.1/3807e6c63954c0b45972ba441e699dca1d03f2a8/play-services-auth-base-18.0.1-javadoc.jar!/" />

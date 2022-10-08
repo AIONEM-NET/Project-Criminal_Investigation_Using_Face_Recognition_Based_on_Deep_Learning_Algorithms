@@ -1,8 +1,6 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.gms:play-services-measurement-impl:20.0.2@aar">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/104b6d89a06594eb958e66950612d032/transformed/jetified-play-services-measurement-impl-20.0.2/res" />
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/218912a4423645d0c7bb18c12202b5b0/transformed/jetified-play-services-measurement-impl-20.0.2/res" />
       <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/45950056a015a9923a564693b392bcac/transformed/jetified-play-services-measurement-impl-20.0.2/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/45950056a015a9923a564693b392bcac/transformed/jetified-play-services-measurement-impl-20.0.2/res" />
       <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/45950056a015a9923a564693b392bcac/transformed/jetified-play-services-measurement-impl-20.0.2/AndroidManifest.xml" />

@@ -1,11 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.datatransport:transport-api:2.2.1@aar">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/a8bb9911b2095c55a8b59af1c121257f/transformed/jetified-transport-api-2.2.1/res" />
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/9a7cc7bc38e78ee58ff7941c4b9cd485/transformed/jetified-transport-api-2.2.1/res" />
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/33d368d4fe5b4a398c0b1c0a4648e5d0/transformed/jetified-transport-api-2.2.1/AndroidManifest.xml" />
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/33d368d4fe5b4a398c0b1c0a4648e5d0/transformed/jetified-transport-api-2.2.1/res" />
       <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/33d368d4fe5b4a398c0b1c0a4648e5d0/transformed/jetified-transport-api-2.2.1/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/33d368d4fe5b4a398c0b1c0a4648e5d0/transformed/jetified-transport-api-2.2.1/res" />
+      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/33d368d4fe5b4a398c0b1c0a4648e5d0/transformed/jetified-transport-api-2.2.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/modules-2/files-2.1/com.google.android.datatransport/transport-api/2.2.1/44ab63fd6744b961c97d388fef15c888f99b561a/transport-api-2.2.1-javadoc.jar!/" />

@@ -4,9 +4,9 @@
       <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/be3db96b5dbc7f1e7b7efc8525ee43d3/transformed/appcompat-1.4.1/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/be3db96b5dbc7f1e7b7efc8525ee43d3/transformed/appcompat-1.4.1/AndroidManifest.xml" />
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/be3db96b5dbc7f1e7b7efc8525ee43d3/transformed/appcompat-1.4.1/res" />
       <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/be3db96b5dbc7f1e7b7efc8525ee43d3/transformed/appcompat-1.4.1/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/be3db96b5dbc7f1e7b7efc8525ee43d3/transformed/appcompat-1.4.1/res" />
+      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/be3db96b5dbc7f1e7b7efc8525ee43d3/transformed/appcompat-1.4.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

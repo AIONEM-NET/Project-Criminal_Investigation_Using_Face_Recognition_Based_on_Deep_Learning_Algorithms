@@ -1,4 +1,4 @@
-package com.facerecognition;
+package criminal.investigation.cctv;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,7 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
         Handler handler=new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -22,5 +23,6 @@ public class SplashScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         },2500);
+
     }
 }

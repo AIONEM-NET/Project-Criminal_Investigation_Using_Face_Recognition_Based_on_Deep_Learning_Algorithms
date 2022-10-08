@@ -4,9 +4,9 @@
       <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/01c04a9fa35d78bc6977a5652813e249/transformed/jetified-camera-view-1.0.0-alpha32/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/01c04a9fa35d78bc6977a5652813e249/transformed/jetified-camera-view-1.0.0-alpha32/AndroidManifest.xml" />
       <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/01c04a9fa35d78bc6977a5652813e249/transformed/jetified-camera-view-1.0.0-alpha32/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/01c04a9fa35d78bc6977a5652813e249/transformed/jetified-camera-view-1.0.0-alpha32/res" />
+      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/01c04a9fa35d78bc6977a5652813e249/transformed/jetified-camera-view-1.0.0-alpha32/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

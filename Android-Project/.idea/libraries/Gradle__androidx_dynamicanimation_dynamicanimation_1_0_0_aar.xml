@@ -1,10 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.dynamicanimation:dynamicanimation:1.0.0@aar">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/8c9fca6a3e34860eef4fafa0d79f2046/transformed/dynamicanimation-1.0.0/res" />
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/f101a2603f1fb7aa7bfebc58a817317d/transformed/dynamicanimation-1.0.0/res" />
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/352c8443e7858333f010fb067d026fbf/transformed/dynamicanimation-1.0.0/res" />
       <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/352c8443e7858333f010fb067d026fbf/transformed/dynamicanimation-1.0.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/352c8443e7858333f010fb067d026fbf/transformed/dynamicanimation-1.0.0/res" />
       <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/352c8443e7858333f010fb067d026fbf/transformed/dynamicanimation-1.0.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />

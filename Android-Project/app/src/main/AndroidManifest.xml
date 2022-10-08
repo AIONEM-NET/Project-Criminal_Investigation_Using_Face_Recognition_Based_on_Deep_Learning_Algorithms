@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.facerecognition">
+    package="criminal.investigation.cctv">
 
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FaceRecognition.NoActionBar">
         <activity
-            android:name=".SplashScreen"
+            android:name="criminal.investigation.cctv.SplashScreen"
             android:label="@string/app_name"
             android:exported="true"
             android:theme="@style/Theme.FaceRecognition.Fullscreen">
@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
+        <activity android:name="criminal.investigation.cctv.MainActivity"
             android:theme="@style/Theme.FaceRecognition.Fullscreen"/>
     </application>
 

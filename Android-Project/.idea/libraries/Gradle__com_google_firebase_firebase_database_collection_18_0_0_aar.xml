@@ -1,11 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.firebase:firebase-database-collection:18.0.0@aar">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/9ff4a8055e6c05d46d0c34164a781a34/transformed/jetified-firebase-database-collection-18.0.0/res" />
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/695b6305bfb64d8681aacfc12fea8baf/transformed/jetified-firebase-database-collection-18.0.0/res" />
+      <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/29d6981acf7ac6745a470c4d2a81a9ac/transformed/jetified-firebase-database-collection-18.0.0/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/29d6981acf7ac6745a470c4d2a81a9ac/transformed/jetified-firebase-database-collection-18.0.0/res" />
       <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/29d6981acf7ac6745a470c4d2a81a9ac/transformed/jetified-firebase-database-collection-18.0.0/AndroidManifest.xml" />
-      <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/29d6981acf7ac6745a470c4d2a81a9ac/transformed/jetified-firebase-database-collection-18.0.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-database-collection/18.0.0/356b17279173563a32e5043c9ead29ca888f8813/firebase-database-collection-18.0.0-javadoc.jar!/" />

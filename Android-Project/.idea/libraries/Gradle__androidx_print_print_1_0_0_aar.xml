@@ -4,11 +4,9 @@
       <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/6b58f32861097a9e08f45b0cedb4bb60/transformed/print-1.0.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/88a263da5a8990b4eb0923aa38faee7a/transformed/print-1.0.0/res" />
-      <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/73d2bf039980ddd4585a95d2d3f87afb/transformed/print-1.0.0/res" />
+      <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/6b58f32861097a9e08f45b0cedb4bb60/transformed/print-1.0.0/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/6b58f32861097a9e08f45b0cedb4bb60/transformed/print-1.0.0/res" />
       <root url="file://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/6b58f32861097a9e08f45b0cedb4bb60/transformed/print-1.0.0/AndroidManifest.xml" />
-      <root url="jar://$PROJECT_DIR$/../../../../../Android/Gradle/caches/transforms-3/6b58f32861097a9e08f45b0cedb4bb60/transformed/print-1.0.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
