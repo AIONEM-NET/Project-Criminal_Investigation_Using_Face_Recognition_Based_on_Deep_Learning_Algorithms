@@ -9,8 +9,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="green">#06772C</color>
-    <color name="red">#C50404</color>
-    <color name="yellow">#C1940C</color>
+    <color name="found_no">#06772C</color>
+    <color name="found_yes">#C50404</color>
+    <color name="no_face">#C1940C</color>
 
 </resources>

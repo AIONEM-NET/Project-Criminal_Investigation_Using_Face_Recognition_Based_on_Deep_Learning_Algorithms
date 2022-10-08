@@ -1,10 +1,13 @@
-plugins {id 'com.android.application'}
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
 
 android {
     compileSdkVersion 32
     buildToolsVersion "32.0.0"
     defaultConfig {
-        applicationId "face.recognition.webcam"
+        applicationId "criminal.investigation.cctv"
         minSdkVersion 21
         targetSdkVersion 32
         versionCode 100
@@ -57,4 +60,3 @@ dependencies {
     implementation('org.tensorflow:tensorflow-lite-support:0.1.0')
 
 }
-apply plugin: 'com.google.gms.google-services'

@@ -1,0 +1,30 @@
+
+.page-body-wrapper.full-page-wrapper {
+    background: url("../images/bg_rib_1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.content-wrapper {
+    background-color: #3f51b5b3;
+}
+.auth .auth-form-light {
+    border-radius: 10px;
+    border: solid 6px #ff5722;
+}    
+.crime-login-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFFFFF;
+    border: solid 2px #000000;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #4747A1;
+    line-height: 23px;
+}
+.auth .auth-form-light {
+    padding: 20px 40px !important;
+}
+.auth .brand-logo {
+    margin-bottom: 20px;
+}

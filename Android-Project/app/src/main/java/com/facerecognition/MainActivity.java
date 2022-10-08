@@ -19,6 +19,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.YuvImage;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
@@ -41,6 +42,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.common.util.concurrent.ListenableFuture;
 
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -123,26 +125,36 @@ public class MainActivity extends AppCompatActivity {
     ProcessCameraProvider cameraProvider;
     private static final int MY_CAMERA_REQUEST_CODE = 100;
 
-    String modelFile="mobile_face_net.tflite"; //model name
+    //model name
+    String modelFile="mobile_face_net.tflite";
 
-    private HashMap<String, Recognition> registered = new HashMap<>(); //saved Faces
+    //saved Faces
+    private HashMap<String, Recognition> registered = new HashMap<>();
+
+    private FirebaseDatabase firebaseDatabase;
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        registered=readFromSP(); //Load saved faces from memory when app starts
+        //Load saved faces from memory when app starts
+        registered = readFromSP();
         setContentView(R.layout.activity_main);
+
+        firebaseDatabase = FirebaseDatabase.getInstance("https://criminal-investigation-face-default-rtdb.firebaseio.com");
+
         face_preview =findViewById(R.id.imageView);
         reco_name =findViewById(R.id.textView);
         preview_info =findViewById(R.id.textView2);
         add_face=findViewById(R.id.imageButton);
-        add_face.setVisibility(View.INVISIBLE);
+        add_face.setVisibility(View.GONE);
 
-        face_preview.setVisibility(View.INVISIBLE);
+        face_preview.setVisibility(View.GONE);
         recognize=findViewById(R.id.button3);
         camera_switch=findViewById(R.id.button5);
         actions=findViewById(R.id.button2);
         preview_info.setText("\nRecognized Face:");
+        preview_info.setText("");
         //Camera Permission
         if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
@@ -179,6 +191,8 @@ public class MainActivity extends AppCompatActivity {
                                 clearnameList();
                                 break;
                             case 5:
+                                face_preview.setImageBitmap(null);
+                                findViewById(R.id.coordinatorLayout).setBackgroundColor(getResources().getColor(R.color.black));
                                 loadphoto();
                                 break;
                             case 6:
@@ -186,20 +200,23 @@ public class MainActivity extends AppCompatActivity {
                                 isRecognizing = false;
                                 recognize.setText("SAVE Face To Database");
                                 add_face.setVisibility(View.VISIBLE);
-                                reco_name.setVisibility(View.INVISIBLE);
+                                reco_name.setVisibility(View.GONE);
                                 face_preview.setVisibility(View.VISIBLE);
-                                preview_info.setText("1.Bring Face in view of Camera.\n\n2.Your Face preview will appear here.\n\n3.Click Add button to save face.");
+                                face_preview.setImageBitmap(null);
+                                findViewById(R.id.coordinatorLayout).setBackgroundColor(getResources().getColor(R.color.black));
+                                preview_info.setText("1.Bring Face in view of Camera.\n\n2.Detected Face photo will appear here.\n\n3.Click Add button to save face.");
 
                                 break;
                             case 7:
 
                                 isRecognizing = true;
                                 start = true;
-                                recognize.setText("FACE RECOGNITION WEBCAM");
-                                add_face.setVisibility(View.INVISIBLE);
+                                recognize.setText("FACE RECOGNITION | CCTV CAMERA");
+                                add_face.setVisibility(View.GONE);
                                 reco_name.setVisibility(View.VISIBLE);
-                                face_preview.setVisibility(View.INVISIBLE);
+                                face_preview.setVisibility(View.GONE);
                                 preview_info.setText("\nRecognized Face:");
+                                preview_info.setText("");
 
                                 break;
                         }
@@ -251,9 +268,7 @@ public class MainActivity extends AppCompatActivity {
         recognize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(recognize.getText().toString().equalsIgnoreCase("FACE RECOGNITION WEBCAM")) {
-
-                } else {
+                if (!recognize.getText().toString().equalsIgnoreCase("FACE RECOGNITION | CCTV CAMERA")) {
                     addFace();
                 }
 
@@ -412,6 +427,7 @@ public class MainActivity extends AppCompatActivity {
                     if (!name.contains(" ")) {
                         Toast.makeText(MainActivity.this, "Enter a valid Name", Toast.LENGTH_LONG).show();
                         inputName.setError("Invalid Name!");
+                        // alertDialog.show();
                         return;
                     }
                     inputName.setError(null);
@@ -419,11 +435,13 @@ public class MainActivity extends AppCompatActivity {
                     if(identity.length() != 16) {
                         Toast.makeText(MainActivity.this, "Enter a valid ID Number", Toast.LENGTH_LONG).show();
                         inputID.setError("Invalid ID Number!");
+                        // alertDialog.show();
                         return;
                     }
                     if (!identity.startsWith("119") && !identity.startsWith("120")) {
                         Toast.makeText(MainActivity.this, "Enter a valid ID Number", Toast.LENGTH_LONG).show();
                         inputID.setError("Invalid ID Number!");
+                        // alertDialog.show();
                         return;
                     }
                     inputID.setError(null);
@@ -431,6 +449,7 @@ public class MainActivity extends AppCompatActivity {
                     if(gender.isEmpty()) {
                         Toast.makeText(MainActivity.this, "Select Gender", Toast.LENGTH_LONG).show();
                         inputGender.setError("Gender required!");
+                        // alertDialog.show();
                         return;
                     }
                     inputGender.setError(null);
@@ -440,6 +459,41 @@ public class MainActivity extends AppCompatActivity {
 
                     registered.put(name, result);
                     start = true;
+
+                    HashMap<String, Object> mapData = new HashMap<>();
+                    mapData.put("name", name);
+                    mapData.put("identity", identity);
+                    mapData.put("gender", gender);
+
+                    DatabaseReference databaseReference = firebaseDatabase.getReference("Criminals").child(identity);
+                    databaseReference.setValue(mapData);
+
+                    Bitmap bitmap = ((BitmapDrawable) face_preview.getDrawable()).getBitmap();
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] data = baos.toByteArray();
+
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(("face-"+name+"-"+identity).replace(" ", "")+".jpg");
+
+                    UploadTask uploadTask = storageReference.putBytes(data);
+                    Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                        @Override
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                            return storageReference.getDownloadUrl();
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            String photo = "";
+                            if (task.isSuccessful()) {
+                                Uri downloadUri = task.getResult();
+                                photo = String.valueOf(downloadUri);
+                            } else {
+                                photo = "";
+                            }
+                            databaseReference.child("photo").setValue(photo);
+                        }
+                    });
 
                     name = "";
                     identity = "";
@@ -695,7 +749,7 @@ public class MainActivity extends AppCompatActivity {
                                                         findViewById(R.id.coordinatorLayout).setBackgroundColor(getResources().getColor(R.color.black));
                                                     } else {
                                                         reco_name.setText("No Face Detected!");
-                                                        findViewById(R.id.coordinatorLayout).setBackgroundColor(getResources().getColor(R.color.yellow));
+                                                        findViewById(R.id.coordinatorLayout).setBackgroundColor(getResources().getColor(R.color.no_face));
                                                     }
                                                 }
 
@@ -800,20 +854,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-
-//            final int numDetectionsOutput = 1;
-//            final ArrayList<SimilarityClassifier.Recognition> recognitions = new ArrayList<>(numDetectionsOutput);
-//            SimilarityClassifier.Recognition rec = new SimilarityClassifier.Recognition(
-//                    id,
-//                    label,
-//                    distance);
-//
-//            recognitions.add( rec );
-
     }
-//    public void register(String name, SimilarityClassifier.Recognition rec) {
-//        registered.put(name, rec);
-//    }
 
     //Compare Faces by distance between face embeddings
     private Pair<String, Float> findNearest(float[] emb) {
@@ -1064,9 +1105,9 @@ public class MainActivity extends AppCompatActivity {
                                 isRecognizing = false;
                                 recognize.setText("RECOGNIZED FACE");
                                 add_face.setVisibility(View.VISIBLE);
-                                reco_name.setVisibility(View.INVISIBLE);
+                                reco_name.setVisibility(View.GONE);
                                 face_preview.setVisibility(View.VISIBLE);
-                                preview_info.setText("1.Bring Face in view of Camera.\n\n2.Your Face preview will appear here.\n\n3.Click Add button to save face.");
+                                preview_info.setText("1.Bring Face in view of Camera.\n\n2.Detected Face photo will appear here.\n\n3.Click Add button to save face.");
                                 Face face = faces.get(0);
                                 System.out.println(face);
 
@@ -1132,38 +1173,53 @@ public class MainActivity extends AppCompatActivity {
 
         if(isRecognizing) {
 
-            double percentage = 0;
+            double accuracy;
 
             if(distance > 1) {
-                percentage = ((distance - 1)*100.0) - 20;
-                if(percentage < 0) percentage = 0;
+                accuracy = ((distance - 1)*100.0) - 20;
+                if(accuracy < 0) accuracy = 0;
             }else {
-                percentage = (100 - (1 - distance)*100.0) + 10;
-                if(percentage > 100) percentage = 100;
+                accuracy = (100 - (1 - distance)*100.0) + 10;
+                if(accuracy > 100) accuracy = 100;
             }
 
-            HashMap<String, Object> hashMap = new HashMap<>();
-            hashMap.put("id", "");
-            hashMap.put("name", name);
-            hashMap.put("gender", "");
-            hashMap.put("photo", "");
-            hashMap.put("percentage", (int) percentage);
-            hashMap.put("isRecognized", false);
+            long time = Calendar.getInstance().getTime().getTime();
+
+            HashMap<String, Object> mapData = new HashMap<>();
+            mapData.put("identity", "");
+            mapData.put("name", "");
+            mapData.put("gender", "");
+            mapData.put("distance", "");
+            mapData.put("accuracy", "");
+            mapData.put("time", time);
+            mapData.put("isRecognized", false);
+
+            DatabaseReference databaseReferenceCCTV = firebaseDatabase.getReference("CCTV-Camera");
 
             if (recognition != null) {
 
-                findViewById(R.id.coordinatorLayout).setBackgroundColor(getResources().getColor(R.color.green));
+                findViewById(R.id.coordinatorLayout).setBackgroundColor(getResources().getColor(R.color.found_yes));
 
-                hashMap.put("id", recognition.getId());
-                hashMap.put("name", recognition.getName());
-                hashMap.put("gender", recognition.getGender());
-                hashMap.put("isRecognized", true);
+                mapData.put("identity", recognition.getId());
+                mapData.put("name", recognition.getName());
+                mapData.put("gender", recognition.getGender());
+                mapData.put("distance", distance);
+                mapData.put("accuracy", (int) accuracy);
+                mapData.put("time", time);
+                mapData.put("isRecognized", true);
+
+                DatabaseReference databaseReferenceDetections = firebaseDatabase.getReference("Detections").push();
+
+                databaseReferenceDetections.setValue(mapData);
+
+                firebaseDatabase.getReference("Criminals").child(recognition.getId()).child("isDetected").setValue(true);
+
 
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 byte[] data = baos.toByteArray();
 
-                StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("face-"+(recognition.getName()+"-"+recognition.getId()).replace(" ", "")+".jpg");
+                StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("face-"+(recognition.getName()+"-"+recognition.getId()).replace(" ", "")+"-1.jpg");
 
                 UploadTask uploadTask = storageReference.putBytes(data);
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -1181,18 +1237,16 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             photo = "";
                         }
-                        FirebaseDatabase.getInstance("https://ai-based-prison-management-default-rtdb.firebaseio.com").getReference("Face-Recognition-WebCAM").child("photo").setValue(photo);
+                        databaseReferenceCCTV.child("photo").setValue(photo);
+                        databaseReferenceDetections.child("photo").setValue(photo);
                     }
                 });
 
             }else {
-                findViewById(R.id.coordinatorLayout).setBackgroundColor(getResources().getColor(R.color.red));
+                findViewById(R.id.coordinatorLayout).setBackgroundColor(getResources().getColor(R.color.found_no));
             }
 
-            hashMap.put("distance", distance);
-            hashMap.put("time", Calendar.getInstance().getTime().getTime());
-
-            FirebaseDatabase.getInstance("https://ai-based-prison-management-default-rtdb.firebaseio.com").getReference("Face-Recognition-WebCAM").setValue(hashMap);
+            databaseReferenceCCTV.setValue(mapData);
 
         }else {
             findViewById(R.id.coordinatorLayout).setBackgroundColor(getResources().getColor(R.color.black));
