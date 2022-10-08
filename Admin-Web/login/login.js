@@ -20,7 +20,7 @@ form.addEventListener("submit", async function(e) {
         window.localStorage.setItem("userName", user.displayName);
         window.localStorage.setItem("userAccount", user.displayName);
 
-        if(true) {
+        if(false) {
             user.updateProfile({
                 displayName: "SuperAdmin"
             }).then(() => {
