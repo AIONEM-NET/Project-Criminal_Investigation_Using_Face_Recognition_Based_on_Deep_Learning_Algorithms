@@ -3,6 +3,7 @@
     package="criminal.investigation.cctv">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -25,6 +26,8 @@
         </activity>
         <activity android:name="criminal.investigation.cctv.MainActivity"
             android:theme="@style/Theme.FaceRecognition.Fullscreen"/>
+        <activity android:name="criminal.investigation.agent.LoginActivity" />
+        <activity android:name="criminal.investigation.agent.CCTVCameraActivity" />
     </application>
 
 </manifest>

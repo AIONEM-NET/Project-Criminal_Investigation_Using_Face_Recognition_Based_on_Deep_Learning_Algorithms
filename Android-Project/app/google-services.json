@@ -8,6 +8,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1062175923855:android:09d0a20bcde59134ea9afa",
+        "android_client_info": {
+          "package_name": "criminal.investigation.agent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1062175923855-pe642629r52vd9tsbhmasirs3s08c5eg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWcxa_pcdsBQ6zRO6qOmV9ff_QDlCVdzk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1062175923855-pe642629r52vd9tsbhmasirs3s08c5eg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1062175923855:android:30acb78749389d41ea9afa",
         "android_client_info": {
           "package_name": "criminal.investigation.cctv"

@@ -41,7 +41,7 @@ fDatabase.ref('Detections').on('value', (list) => {
                     </label>
                 </td>
                 <td class="text-center">
-                    ${new Date(data.time).toString().replace("GMT+0200 (Eastern European Standard Time)", "")}
+                    ${new Date(data.time).toString().substring(0, 24)}
                 </td>
             </tr>
         `;

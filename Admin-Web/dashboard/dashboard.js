@@ -58,7 +58,7 @@ let noPolice = 0;
 let noPoliceActive = 0;
 let noPoliceDisabled = 0;
 
-fDatabase.ref('Police').on('value', (list) => {
+fDatabase.ref('Agents').on('value', (list) => {
 
     noPolice = 0;
     noPoliceActive = 0;
@@ -159,9 +159,9 @@ function graphAccuracyNo() {
         var areaData = {
           labels: ["", "", ""],
           datasets: [{
-              data: [33.3333, 33.3333, 33.3333],
+              data: [averageAccuracy, 100 - averageAccuracy, 0],
               backgroundColor: [
-                 "#4B49AC","#FFC100", "#248AFD",
+                 "#4B49AC","#EEEEEE", "#4B49AC",
               ],
               borderColor: "rgba(0,0,0,0)"
             }

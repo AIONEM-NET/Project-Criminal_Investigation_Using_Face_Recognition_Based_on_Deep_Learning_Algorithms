@@ -90,6 +90,13 @@ function graphAccuracy() {
       filler: {
         propagate: true
       }
+    },
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
     }
   }
 

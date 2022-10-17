@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Register - Criminal Investigation Using Face Recognition Based on Deep Learning Algorithms</title>
+  <title>Edit Agency - Criminal Investigation Using Face Recognition Based on Deep Learning Algorithms</title>
   <link rel="stylesheet" href="../assets/vendors/feather/feather.css">
   <link rel="stylesheet" href="../assets/vendors/ti-icons/css/themify-icons.css">
   <link rel="stylesheet" href="../assets/vendors/css/vendor.bundle.base.css">
@@ -87,9 +87,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../police/">
+            <a class="nav-link" href="../agents/">
               <i class="icon-police mdi mdi-store menu-icon"></i>
-              <span class="menu-title">Police Access</span>
+              <span class="menu-title">Agent Access</span>
             </a>
           </li>
           <li class="nav-item active hidden">
@@ -120,7 +120,7 @@
           <div class="col-lg-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">Police Registration</h4>
+              <h4 class="card-title">Edit Agent</h4>
               <p class="card-description">
                 
               </p>
@@ -133,27 +133,64 @@
                       <p class="card-description">
 
                       </p>
-                      <form class="forms-sample" autocomplete="off">
+                      <form class="forms-sample form-register" autocomplete="off">
                           <div class="form-group row">
                               <label for="name" class="col-sm-3 col-form-label">Name</label>
                               <div class="col-sm-9">
-                                  <input type="text" name="name" class="form-control" id="name" placeholder="Name" autocomplete="off" required>
+                                  <input type="text" name="name" class="form-control text-dark" id="name" placeholder="Name" autocomplete="off" required>
                               </div>
                           </div>
-                          <div class="form-group row">
+                          <div class="form-group row hidden">
                               <label for="email" class="col-sm-3 col-form-label">Email</label>
                               <div class="col-sm-9">
-                                  <input type="email" name="email" class="form-control" id="email" placeholder="Email" autocomplete="off" required>
+                                  <input type="email" name="email" class="form-control text-dark" id="email" placeholder="Email" autocomplete="off" disabled required1>
                               </div>
                           </div>
                           <div class="form-group row">
-                            <label for="district" class="col-sm-3 col-form-label">District</label>
+                              <label for="type" class="col-sm-3 col-form-label">Agent Type</label>
+                              <div class="col-sm-9">
+                                  <select class="form-control text-dark" name="type" id="type" autocomplete="off" required>
+                                      <option value="">Select Type</option>
+                                      <option value="RIB Agent">RIB Agent</option>
+                                      <option value="Police Agent">Police Agent</option>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="district" class="col-sm-3 col-form-label">DPU</label>
                             <div class="col-sm-9">
-                              <select class="form-control" name="district" id="district" autocomplete="off" required>
-                                  <option value="">District</option>
+                              <select class="form-control text-dark" name="district" id="district" autocomplete="off" required>
+                                  <option value="">Select DPU</option>
                                   <option value="Gasabo">Gasabo</option>
                                   <option value="Kicukiro">Kicukiro</option>
                                   <option value="Nyarugenge">Nyarugenge</option>
+                                  <option value="Burera">Burera</option>
+                                  <option value="Gakenke">Gakenke</option>
+                                  <option value="Gicumbi">Gicumbi</option>
+                                  <option value="Musanze">Musanze</option>
+                                  <option value="Rulindo">Rulindo</option>
+                                  <option value="Gisagara">Gisagara</option>
+                                  <option value="Huye">Huye</option>
+                                  <option value="Kamonyi">Kamonyi</option>
+                                  <option value="Muhanga">Muhanga</option>
+                                  <option value="Nyamagabe">Nyamagabe</option>
+                                  <option value="Nyanza">Nyanza</option>
+                                  <option value="Nyaruguru">Nyaruguru</option>
+                                  <option value="Ruhango">Ruhango</option>
+                                  <option value="Bugesera">Bugesera</option>
+                                  <option value="Gatsibo">Gatsibo</option>
+                                  <option value="Kayonza">Kayonza</option>
+                                  <option value="Kirehe">Kirehe</option>
+                                  <option value="Ngoma">Ngoma</option>
+                                  <option value="Nyagatare">Nyagatare</option>
+                                  <option value="Rwamagana">Rwamagana</option>
+                                  <option value="Karongi">Karongi</option>
+                                  <option value="Ngororero">Ngororero</option>
+                                  <option value="Nyabihu">Nyabihu</option>
+                                  <option value="Nyamasheke">Nyamasheke</option>
+                                  <option value="Rubavu">Rubavu</option>
+                                  <option value="Rusizi">Rusizi</option>
+                                  <option value="Rutsiro">Rutsiro</option>
                               </select>
                             </div>
                           </div>
@@ -161,18 +198,6 @@
                               <label for="phone" class="col-sm-3 col-form-label">Phone</label>
                               <div class="col-sm-9">
                                   <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone number" autocomplete="off" required1>
-                              </div>
-                          </div>
-                          <div class="form-group row">
-                              <label for="password" class="col-sm-3 col-form-label">Password</label>
-                              <div class="col-sm-9">
-                                  <input type="password" name="password" class="form-control" id="password" placeholder="Password" autocomplete="off" required>
-                              </div>
-                          </div>
-                          <div class="form-group row">
-                              <label for="re-password" class="col-sm-3 col-form-label">Re Password</label>
-                              <div class="col-sm-9">
-                                  <input type="password" name="re-password" class="form-control" id="re-password" placeholder="Repeat Password" autocomplete="off" required>
                               </div>
                           </div>
                           <div class="form-check form-check-flat form-check-primary hidden">
@@ -183,7 +208,7 @@
                           </div>
                           <div class="row">
                               <div class="col-3"></div>
-                              <button type="submit" class="col-4 btn btn-success mr-2">Submit</button>
+                              <button type="submit" class="col-4 btn btn-success mr-2">Update</button>
                               <button class="col-4 btn btn-warning" onclick="window.history.back();">Cancel</button>
                           </div>
                       </form>
@@ -199,7 +224,7 @@
         </div>
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2022-2023. | <b><u>GROUP 6</u></b> | <a href="../https://www.ur.ac.rw/" target="_blank">University of Rwanda</a></span>
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021-2022. | <b><u>GROUP 6</u></b> | <a href="../https://www.ur.ac.rw/" target="_blank">University of Rwanda</a></span>
             <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> <a href="../https://www.police.gov.rw" target="_blank">NPC College - Information Security</a> <i class=""></i></span>
           </div>
         </footer> 
@@ -230,7 +255,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.6.0/firebase-storage.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.0/firebase-analytics.js"></script>
   <script src="../../database/database-config.js"></script>
-  <script src="register.js"></script>
+  <script src="agent-edit.js"></script>
   <script src="../security.js"></script>
 </body>
 </html>

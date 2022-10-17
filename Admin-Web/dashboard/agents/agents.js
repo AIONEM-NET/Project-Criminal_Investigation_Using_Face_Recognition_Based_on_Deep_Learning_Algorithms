@@ -7,7 +7,7 @@ document.querySelector("tbody").innerHTML = "";
 document.querySelector(".table-responsive").classList.add("loader");
 
 let isDataTable = true;
-fDatabase.ref('Police').on('value', (list) => {
+fDatabase.ref('Agents').on('value', (list) => {
 
     let html = "";
     let i = 0;
@@ -30,12 +30,18 @@ fDatabase.ref('Police').on('value', (list) => {
                     ${data.email ?? '-'}
                 </td>
                 <td class="text-center">
-                    ${data.district ?? '-'}
+                    ${data.type ?? '-'}
                 </td>
                 <td class="text-center">
+                    ${data.district ?? '-'}
+                </td>
+                <td class="text-center" style="display: inline-flex-1; gap: 4px;">
                     <label class="badge text-center ${data.isActive == true ? 'badge-success' : 'badge-danger' }" onclick="onPoliceActivate('${id}', ${data.isActive == true}, '${data.name}');" style="pointer: cursor;">
                         ${data.isActive == true ? 'Activated' : 'Disabled'}
                     </label>
+                    <a class="badge text-center text-white badge-secondary" href="../agent-edit/?id=${id}" style="pointer: cursor;">
+                        <i class="fa fa-edit"></i> <span>Edit</span>
+                    </a>
                 </td>
             </tr>
         `;
@@ -84,11 +90,11 @@ fDatabase.ref('Police').on('value', (list) => {
 
 function onPoliceActivate(id, isActive, name) {
 
-    const isYes = confirm(`Do you want to ${isActive == true ? 'DISABLE' : 'ACTIVATE'} "${name}" ?`);
+    const isYes = confirm(`Do you want to ${isActive == true ? 'DISABLE' : 'ACTIVATE'} Agent "${name}" ?`);
 
     if(isYes) {
     
-        fDatabase.ref('Police/'+ id +'/isActive').set(!(isActive == true));
+        fDatabase.ref('Agents/'+ id +'/isActive').set(!(isActive == true));
 
     }
 

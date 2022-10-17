@@ -1246,7 +1246,9 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.coordinatorLayout).setBackgroundColor(getResources().getColor(R.color.found_no));
             }
 
-            databaseReferenceCCTV.setValue(mapData);
+            for(String key : mapData.keySet()) {
+                databaseReferenceCCTV.child(key).setValue(mapData.get(key));
+            }
 
         }else {
             findViewById(R.id.coordinatorLayout).setBackgroundColor(getResources().getColor(R.color.black));
