@@ -52,7 +52,22 @@ form.addEventListener("submit", async function(e) {
         await user.sendEmailVerification()
         .then(() => {
 
-            // alert("Verification email is sent to the Police");
+            // alert("Verification email is sent to the Agent");
+
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            let errorMessage = error.message;
+            if(errorMessage) {
+                alert(errorMessage);
+            }
+        });
+
+
+        await fAuth.sendPasswordResetEmail(email)
+        .then(() => {
+
+            // alert("Password rest email is sent to the Agent");
 
             window.location.replace("../agents/");
 
