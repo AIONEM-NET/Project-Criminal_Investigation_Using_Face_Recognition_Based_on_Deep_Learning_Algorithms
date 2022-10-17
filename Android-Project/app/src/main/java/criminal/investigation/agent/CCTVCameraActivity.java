@@ -131,7 +131,7 @@ public class CCTVCameraActivity extends Activity {
 
                                         sendNotification(CCTVCameraActivity.this,
                                                 identity.hashCode(),
-                                                name + "'s Face Detected",
+                                                name + "'s Face Detected" +" at "+ location,
                                                 identity + " - " + gender + " - " + accuracy + " %"
                                         );
 
