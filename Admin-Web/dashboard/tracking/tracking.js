@@ -36,8 +36,8 @@ fDatabase.ref('Criminals').on('value', (list) => {
                     ${data.gender ?? '-'}
                 </td>
                 <td class="text-center">
-                    <label class="badge text-center ${data.isTracking ? data.isDetected == true ? 'badge-success' : 'badge-danger' : 'badge-primary' }">
-                        ${data.isTracking ? data.isDetected == true ? 'Detected' : 'Not Detected' : '-------'}
+                    <label class="badge text-center ${data.isTracking ? data.isDetected == true ? (data.isCaught ? 'badge-success' : 'badge-warning') : 'badge-danger' : 'badge-primary' }" onclick="onCriminalCaught('${id}', ${data.isTracking == true}, ${data.isDetected == true}, ${data.isCaught == true}, '${data.name}');" style="pointer: cursor;">
+                        ${data.isTracking ? data.isDetected == true ? (data.isCaught ? 'Caught' : 'Detected') : 'Not Detected' : '-------'}
                     </label>
                 </td>
                 <td class="text-center">
@@ -99,6 +99,22 @@ function onCriminalTracking(id, isTracking, name) {
         fDatabase.ref('Criminals/'+ id +'/isTracking').set(!(isTracking == true));
 
         fDatabase.ref('Criminals/'+ id +'/isDetected').set(false);
+
+        fDatabase.ref('Criminals/'+ id +'/isCaught').set(false);
+
+    }
+
+}
+
+
+function onCriminalCaught(id, isTracking, isDetected, isCaught, name) {
+    if(!isTracking || !isDetected) return;
+
+    const isYes = confirm(`Is Criminal ${name} ${isCaught == true ? 'NOT' : ''} catched ?`);
+
+    if(isYes) {
+    
+        fDatabase.ref('Criminals/'+ id +'/isCaught').set(!(isCaught == true));
 
     }
 

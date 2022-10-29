@@ -68,13 +68,13 @@ public class LoginActivity extends Activity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        findViewById(R.id.progressBar).setVisibility(View.INVISIBLE);
+                        FirebaseUser firebaseUser = task.getResult().getUser();
 
-                        if(task.isSuccessful()) {
+                        if(task.isSuccessful() && firebaseUser != null) {
 
-                            FirebaseUser firebaseUser = task.getResult().getUser();
+                            if(firebaseUser.isEmailVerified()) {
 
-                            if(true || firebaseUser.isEmailVerified()) {
+                                findViewById(R.id.progressBar).setVisibility(View.INVISIBLE);
 
                                 if("Agent".equalsIgnoreCase(firebaseUser.getDisplayName())) {
 
@@ -86,23 +86,35 @@ public class LoginActivity extends Activity {
 
                                 }else {
 
-                                    Toast.makeText(getApplicationContext(), "You don't have Agent access", Toast.LENGTH_LONG).show();
-
                                     FirebaseAuth.getInstance().signOut();
+
+                                    Toast.makeText(getApplicationContext(), "You don't have Agent access", Toast.LENGTH_LONG).show();
+                                    edtEmail.setError("Not an Agent's email");
 
                                 }
 
                             }else {
 
-                                Toast.makeText(getApplicationContext(), "Check your email to verify your account first", Toast.LENGTH_LONG).show();
+                                firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
 
-                                firebaseUser.sendEmailVerification();
+                                        FirebaseAuth.getInstance().signOut();
 
-                                FirebaseAuth.getInstance().signOut();
+                                        findViewById(R.id.progressBar).setVisibility(View.INVISIBLE);
+
+                                        Toast.makeText(getApplicationContext(), "Email is not verified", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getApplicationContext(), "Check your email to verify your account first", Toast.LENGTH_LONG).show();
+                                        edtEmail.setError("Email is not verified");
+
+                                    }
+                                });
 
                             }
 
                         }else {
+
+                            findViewById(R.id.progressBar).setVisibility(View.INVISIBLE);
 
                             if(task.getException()  != null) {
                                 Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();

@@ -10,6 +10,7 @@ fDatabase.ref("CCTV-Camera").on("value", (item) => {
     const id = item.key;
     const data = item.val();
 
+    document.querySelector(".cctv-district").value = data.district ?? "";
     document.querySelector(".cctv-location").value = data.location ?? "";
     document.querySelector(".cctv-image").src = data.photo ?? "../../assets/images/face_scan_1.gif";
     document.querySelector(".cctv-name").innerHTML = data.name ?? "-";
@@ -25,18 +26,24 @@ fDatabase.ref("CCTV-Camera").on("value", (item) => {
 
 document.querySelector(".cct-location-update").addEventListener("click", function() {
 
+  let district = document.querySelector(".cctv-district").value;
   let location = document.querySelector(".cctv-location").value;
 
+  if(!district) {
+    // alert("Select CCTV Camera District")
+    // return;
+  }
   if(!location) {
     alert("Enter CCTV Camera Location")
     return;
   }
 
   
-  const isYes = confirm(`Do you want to update CCTV Camera Location to "${location}" ?`);
+  const isYes = confirm(`Do you want to update CCTV Camera Location to "${district +" - "+location}" ?`);
 
   if(isYes) {
   
+      fDatabase.ref('CCTV-Camera/' +'/district').set(district);
       fDatabase.ref('CCTV-Camera/' +'/location').set(location);
 
   }

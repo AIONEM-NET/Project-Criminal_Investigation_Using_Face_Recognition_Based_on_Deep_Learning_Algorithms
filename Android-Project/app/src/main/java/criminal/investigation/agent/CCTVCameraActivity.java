@@ -1,7 +1,5 @@
 package criminal.investigation.agent;
 
-import static android.os.FileUtils.copy;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.NotificationChannel;
@@ -16,6 +14,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,6 +39,8 @@ import criminal.investigation.cctv.R;
 
 public class CCTVCameraActivity extends Activity {
 
+    String myDistrict = "";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +55,6 @@ public class CCTVCameraActivity extends Activity {
             return;
         }
 
-
         TextView txtLocation = (TextView) findViewById(R.id.txtLocation);
         TextView txtName = (TextView) findViewById(R.id.txtName);
         TextView txtIdentity = (TextView) findViewById(R.id.txtIdentity);
@@ -64,76 +64,79 @@ public class CCTVCameraActivity extends Activity {
         ImageView imgFace = (ImageView) findViewById(R.id.imgFace);
 
 
+        findViewById(R.id.btnLogout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(CCTVCameraActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+
+
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot data) {
 
+                String district = data.hasChild("district") ? String.valueOf(data.child("district").getValue()) : "";
                 String location = data.hasChild("location") ? String.valueOf(data.child("location").getValue()) : "";
                 String name = data.hasChild("name") ? String.valueOf(data.child("name").getValue()) : "";
                 String identity = data.hasChild("identity") ? String.valueOf(data.child("identity").getValue()) : "";
                 String gender = data.hasChild("gender") ? String.valueOf(data.child("gender").getValue()) : "";
                 String photo = data.hasChild("photo") ? String.valueOf(data.child("photo").getValue()) : "";
-                double accuracy = data.hasChild("accuracy") ? data.child("accuracy").getValue(Double.class) : 0;
+                String accuracy = data.hasChild("accuracy") ? String.valueOf(data.child("accuracy").getValue()) : "";
                 long time = data.hasChild("time") ? data.child("time").getValue(Long.class) : 0;
                 boolean isRecognized = data.hasChild("isRecognized") ? data.child("isRecognized").getValue(Boolean.class) : false;
 
                 long timeInterval = System.currentTimeMillis() - time;
 
 
-                txtLocation.setText(location);
-                txtName.setText(name);
-                txtIdentity.setText(identity);
-                txtGender.setText(gender);
-                txtTime.setText(new Date(time).toString());
-                txtAccuracy.setText(accuracy + " %");
+                if(TextUtils.isEmpty(district) || district.equalsIgnoreCase(myDistrict)) {
 
-                new DownloadImageTask(imgFace).execute(photo);
+                    txtLocation.setText((!TextUtils.isEmpty(district) ? district : "All") +" : "+ location);
+                    txtName.setText(name);
+                    txtIdentity.setText(identity);
+                    txtGender.setText(gender);
+                    txtTime.setText(new Date(time).toString());
+                    txtAccuracy.setText(accuracy + " %");
 
+                    new DownloadImageTask(imgFace).execute(photo);
 
-                findViewById(R.id.btnLogout).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                    if (isRecognized) {
 
-                        FirebaseAuth.getInstance().signOut();
-                        Intent intent = new Intent(CCTVCameraActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish();
+                        FirebaseDatabase.getInstance().getReference("Criminals").child(identity).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot data) {
 
-                    }
-                });
+                                boolean isTracking = data.hasChild("isTracking") ? data.child("isTracking").getValue(Boolean.class) : false;
+                                boolean isCaught = data.hasChild("isCaught") ? data.child("isCaught").getValue(Boolean.class) : false;
 
+                                if (isTracking) {
 
-                if(isRecognized) {
+                                    txtAccuracy.setText(accuracy + " %" + " | " + (isCaught ? "is Caught" : "is Detected"));
 
-                    FirebaseDatabase.getInstance().getReference("Criminals").child(identity).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot data) {
+                                    if (timeInterval < 1 * 60 * 1000) {
 
-                            boolean isTracking = data.hasChild("isTracking") ? data.child("isTracking").getValue(Boolean.class) : false;
-                            boolean isCaught = data.hasChild("isCaught") ? data.child("isCaught").getValue(Boolean.class) : false;
+                                        if (isCaught) {
 
-                            if(isTracking) {
+                                            sendNotification(CCTVCameraActivity.this,
+                                                    (identity + "Caught").hashCode(),
+                                                    name + " is Caught",
+                                                    identity + " - " + gender + " - " + accuracy + " %"
+                                            );
 
+                                        } else {
 
-                                txtAccuracy.setText(accuracy + " %" +" | "+ (isCaught ? "is Caught" : "is Detected"));
+                                            sendNotification(CCTVCameraActivity.this,
+                                                    (identity + "Detected").hashCode(),
+                                                    name + "'s Face Detected" + " at " + district +" : "+ location,
+                                                    identity + " - " + gender + " - " + accuracy + " %"
+                                            );
 
-                                if(timeInterval < 5*60*1000) {
-
-                                    if (isCaught) {
-
-                                        sendNotification(CCTVCameraActivity.this,
-                                                identity.hashCode(),
-                                                name + " is Caught",
-                                                identity + " - " + gender + " - " + accuracy + " %"
-                                        );
-
-                                    } else {
-
-                                        sendNotification(CCTVCameraActivity.this,
-                                                identity.hashCode(),
-                                                name + "'s Face Detected" +" at "+ location,
-                                                identity + " - " + gender + " - " + accuracy + " %"
-                                        );
+                                        }
 
                                     }
 
@@ -141,13 +144,25 @@ public class CCTVCameraActivity extends Activity {
 
                             }
 
-                        }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                            }
+                        });
 
-                        }
-                    });
+                    }
+
+                }else {
+
+                    txtLocation.setText("You don't have Access");
+                    txtName.setText("");
+                    txtIdentity.setText("");
+                    txtGender.setText("");
+                    txtTime.setText("");
+                    txtAccuracy.setText("");
+                    imgFace.setImageResource(R.drawable.logo_rib);
+
+                    txtLocation.setBackgroundColor(Color.parseColor("#C1940C"));
 
                 }
 
@@ -167,6 +182,7 @@ public class CCTVCameraActivity extends Activity {
             @Override
             public void onDataChange(@NonNull DataSnapshot data) {
 
+                myDistrict = data.hasChild("district") ? data.child("district").getValue(String.class) : "";
                 boolean isActive = data.hasChild("isActive") ? data.child("isActive").getValue(Boolean.class) : false;
 
                 if(isActive) {
@@ -184,7 +200,7 @@ public class CCTVCameraActivity extends Activity {
 
                     notificationManager.cancelAll();
 
-                    txtLocation.setText("You don't have Access");
+                    txtLocation.setText("You are not Approved");
                     txtName.setText("");
                     txtIdentity.setText("");
                     txtGender.setText("");

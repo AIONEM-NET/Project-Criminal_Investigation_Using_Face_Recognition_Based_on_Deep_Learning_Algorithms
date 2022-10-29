@@ -10,12 +10,14 @@ document.querySelector(".dashboard").classList.add("loader");
 let noCriminals = 0;
 let noTrackings = 0;
 let noDetected = 0;
+let noCaught = 0;
 
 fDatabase.ref('Criminals').on('value', (list) => {
 
     noCriminals = 0;
     noTrackings = 0;
     noDetected = 0;
+    noCaught = 0;
 
     let i = 0;
     let counts = list.numChildren();
@@ -36,9 +38,14 @@ fDatabase.ref('Criminals').on('value', (list) => {
             noDetected++;
         }
 
+        if(data.isCaught == true) {
+            noCaught++;
+        }
+
         document.querySelector(".count-criminals").innerHTML = noCriminals;
         document.querySelector(".count-trackings").innerHTML = noTrackings;
         document.querySelector(".count-detected").innerHTML = noDetected;
+        document.querySelector(".count-caught").innerHTML = noCaught;
 
         if(counts == i) {
             completedData++;
