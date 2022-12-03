@@ -1,7 +1,6 @@
 package criminal.investigation.agent;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -9,18 +8,22 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -37,16 +40,18 @@ import java.util.Date;
 
 import criminal.investigation.cctv.R;
 
-public class CCTVCameraActivity extends Activity {
+public class CCTVCameraActivity extends AppCompatActivity {
 
     String myDistrict = "";
+
+    public static FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cctv_camera);
 
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (firebaseUser == null) {
             Intent intent = new Intent(CCTVCameraActivity.this, LoginActivity.class);
@@ -54,6 +59,8 @@ public class CCTVCameraActivity extends Activity {
             finish();
             return;
         }
+
+        setSupportActionBar(findViewById(R.id.toolbar));
 
         TextView txtLocation = (TextView) findViewById(R.id.txtLocation);
         TextView txtName = (TextView) findViewById(R.id.txtName);
@@ -64,14 +71,12 @@ public class CCTVCameraActivity extends Activity {
         ImageView imgFace = (ImageView) findViewById(R.id.imgFace);
 
 
-        findViewById(R.id.btnLogout).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnReports).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(CCTVCameraActivity.this, LoginActivity.class);
+                Intent intent = new Intent(CCTVCameraActivity.this, ReportsActivity.class);
                 startActivity(intent);
-                finish();
 
             }
         });
@@ -175,6 +180,8 @@ public class CCTVCameraActivity extends Activity {
 
         };
 
+        txtLocation.setText("Account deleted");
+        txtLocation.setBackgroundColor(Color.parseColor("#FF0000"));
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("CCTV-Camera");
 
@@ -238,12 +245,16 @@ public class CCTVCameraActivity extends Activity {
 
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
+        Uri rawPathUri = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.danger);
+        Ringtone r = RingtoneManager.getRingtone(context, rawPathUri);
+        r.play();
+
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context.getApplicationContext(), CHANNEL_ID)
                 .setSmallIcon(R.drawable.logo_rib)
                 .setContentTitle(title)
                 .setContentText(message)
-                .setSound(soundUri)
+                // .setSound(soundUri)
                 .setPriority(NotificationCompat.PRIORITY_HIGH);
 
         notificationManager.notify(id, builder.build());
@@ -273,6 +284,33 @@ public class CCTVCameraActivity extends Activity {
             imageView.setImageBitmap(result);
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar_agent, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.action_reports) {
+            Intent intent = new Intent(this, ReportsActivity.class);
+            startActivity(intent);
+            return false;
+        }else if (itemId == R.id.action_logout) {
+            logout();
+            return false;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void logout() {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

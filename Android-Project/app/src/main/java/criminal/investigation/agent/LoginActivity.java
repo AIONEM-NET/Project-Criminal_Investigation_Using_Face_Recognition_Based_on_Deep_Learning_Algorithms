@@ -53,6 +53,11 @@ public class LoginActivity extends Activity {
                     edtEmail.setError("Email required");
                     return;
                 }
+                if(!isValidEmail(email)) {
+                    Toast.makeText(LoginActivity.this, "Invalid Email", Toast.LENGTH_SHORT).show();
+                    edtEmail.setError("Email is invalid");
+                    return;
+                }
                 edtEmail.setError(null);
 
                 if(TextUtils.isEmpty(password)) {
@@ -68,9 +73,9 @@ public class LoginActivity extends Activity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        FirebaseUser firebaseUser = task.getResult().getUser();
+                        if(task.isSuccessful() && task.getResult() != null) {
 
-                        if(task.isSuccessful() && firebaseUser != null) {
+                            FirebaseUser firebaseUser = task.getResult().getUser();
 
                             if(firebaseUser.isEmailVerified()) {
 
@@ -130,5 +135,44 @@ public class LoginActivity extends Activity {
             }
         });
 
+        findViewById(R.id.txtResetPassword).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String email = edtEmail.getText().toString();
+
+                if(TextUtils.isEmpty(email)) {
+                    Toast.makeText(LoginActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
+                    edtEmail.setError("Email is required");
+                    return;
+                }
+                if(!isValidEmail(email)) {
+                    Toast.makeText(LoginActivity.this, "Invalid Email", Toast.LENGTH_SHORT).show();
+                    edtEmail.setError("Email is invalid");
+                    return;
+                }
+                edtEmail.setError(null);
+
+                findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+
+                FirebaseAuth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        findViewById(R.id.progressBar).setVisibility(View.INVISIBLE);
+
+                        Toast.makeText(getApplicationContext(), "Follow the link sent on your email to reset your password", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
+            }
+        });
+
     }
+
+    public static boolean isValidEmail(String email) {
+        return (!TextUtils.isEmpty(email) && email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.[a-z]+"));
+    }
+
 }

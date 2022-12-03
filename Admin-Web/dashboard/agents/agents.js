@@ -42,6 +42,9 @@ fDatabase.ref('Agents').on('value', (list) => {
                     <a class="badge text-center text-white badge-secondary" href="../agent-edit/?id=${id}" style="pointer: cursor;">
                         <i class="fa fa-edit"></i> <span>Edit</span>
                     </a>
+                    <label class="badge text-center badge-danger" onclick="onPoliceDelete('${id}', ${data.isActive == true}, '${data.name}');" style="pointer: cursor;">
+                    <i class="fa fa-trash"></i> Delete
+                    </label>
                 </td>
             </tr>
         `;
@@ -95,6 +98,19 @@ function onPoliceActivate(id, isActive, name) {
     if(isYes) {
     
         fDatabase.ref('Agents/'+ id +'/isActive').set(!(isActive == true));
+
+    }
+
+}
+
+
+function onPoliceDelete(id, isActive, name) {
+
+    const isYes = confirm(`Do you want to 'DELETE' Agent "${name}" ?`);
+
+    if(isYes) {
+    
+        fDatabase.ref('Agents/'+ id).remove();
 
     }
 

@@ -28,6 +28,10 @@
             android:theme="@style/Theme.FaceRecognition.Fullscreen"/>
         <activity android:name="criminal.investigation.agent.LoginActivity" />
         <activity android:name="criminal.investigation.agent.CCTVCameraActivity" />
+        <activity
+            android:name="criminal.investigation.agent.ReportsActivity"
+            android:label="Reports"
+            android:theme="@style/Theme.FaceRecognition.NoActionBar"/>
     </application>
 
 </manifest>

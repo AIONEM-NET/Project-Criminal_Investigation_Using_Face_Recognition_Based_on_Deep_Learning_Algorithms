@@ -67,8 +67,19 @@
             android:layout_height="wrap_content"
             android:text="LOGIN"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="0dp"
             android:background="@drawable/round_bg"/>
+
+        <TextView
+            android:id="@+id/txtResetPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reset Password?"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            android:layout_marginTop="15dp"/>
 
     </LinearLayout>
 
