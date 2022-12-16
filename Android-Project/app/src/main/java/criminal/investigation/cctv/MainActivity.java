@@ -460,10 +460,13 @@ public class MainActivity extends AppCompatActivity {
                     registered.put(name, result);
                     start = true;
 
+                    long time = Calendar.getInstance().getTime().getTime();
+
                     HashMap<String, Object> mapData = new HashMap<>();
                     mapData.put("name", name);
                     mapData.put("identity", identity);
                     mapData.put("gender", gender);
+                    mapData.put("time", time);
 
                     DatabaseReference databaseReference = firebaseDatabase.getReference("Criminals").child(identity);
                     databaseReference.setValue(mapData);

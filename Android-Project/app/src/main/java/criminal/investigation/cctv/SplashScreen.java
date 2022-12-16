@@ -2,6 +2,7 @@ package criminal.investigation.cctv;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,20 +25,17 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
 
-                if(getPackageName().equals("criminal.investigation.agent")) {
-
-                    Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
-                    startActivity(intent);
-
-                }else {
-                    Intent intent = new Intent(SplashScreen.this, MainActivity.class);
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
+                startActivity(intent);
 
                 finish();
             }
         },2500);
 
+    }
+
+    public static boolean isAgentApp(Context context) {
+        return context.getPackageName().equals("criminal.investigation.agent");
     }
 
 }

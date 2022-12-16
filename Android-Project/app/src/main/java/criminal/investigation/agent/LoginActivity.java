@@ -2,11 +2,14 @@ package criminal.investigation.agent;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,7 +21,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import criminal.investigation.cctv.MainActivity;
 import criminal.investigation.cctv.R;
+import criminal.investigation.cctv.SplashScreen;
 
 
 public class LoginActivity extends Activity {
@@ -30,9 +35,20 @@ public class LoginActivity extends Activity {
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        boolean isAgentApp = SplashScreen.isAgentApp(this);
+
         if(firebaseUser != null) {
-            Intent intent = new Intent(LoginActivity.this, CCTVCameraActivity.class);
-            startActivity(intent);
+
+            if(isAgentApp) {
+
+                Intent intent = new Intent(LoginActivity.this, CCTVCameraActivity.class);
+                startActivity(intent);
+
+            }else {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+
             finish();
             return;
         }
@@ -40,6 +56,17 @@ public class LoginActivity extends Activity {
         EditText edtEmail = (EditText) findViewById(R.id.edtEmail);
         EditText edtPassword = (EditText) findViewById(R.id.edtPassword);
         Button btnLogin = (Button) findViewById(R.id.btnLogin);
+
+        if(isAgentApp) {
+
+            ((TextView) findViewById(R.id.textView1)).setText("Criminal Investigation Agents");
+
+        }else {
+
+            ((TextView) findViewById(R.id.textView1)).setText("CCTV Admin App");
+            ((RelativeLayout) findViewById(R.id.rLayoutMain)).setBackgroundColor(Color.BLACK);
+
+        }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,12 +116,25 @@ public class LoginActivity extends Activity {
                                     startActivity(intent);
                                     finish();
 
+                                }else if("Admin".equalsIgnoreCase(firebaseUser.getDisplayName())) {
+
+                                    Toast.makeText(getApplicationContext(), "Login successfully", Toast.LENGTH_LONG).show();
+
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+
                                 }else {
 
                                     FirebaseAuth.getInstance().signOut();
 
-                                    Toast.makeText(getApplicationContext(), "You don't have Agent access", Toast.LENGTH_LONG).show();
-                                    edtEmail.setError("Not an Agent's email");
+                                    if(isAgentApp) {
+                                        Toast.makeText(getApplicationContext(), "You don't have Agent access", Toast.LENGTH_LONG).show();
+                                        edtEmail.setError("Not an Agent's email");
+                                    }else {
+                                        Toast.makeText(getApplicationContext(), "You don't have Admin access", Toast.LENGTH_LONG).show();
+                                        edtEmail.setError("Not an Admin's email");
+                                    }
 
                                 }
 

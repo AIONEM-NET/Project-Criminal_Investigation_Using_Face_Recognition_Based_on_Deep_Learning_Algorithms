@@ -7,7 +7,7 @@ document.querySelector("tbody").innerHTML = "";
 document.querySelector(".table-responsive").classList.add("loader");
 
 let isDataTable = true;
-fDatabase.ref('Detections').on('value', (list) => {
+fDatabase.ref('Admins').on('value', (list) => {
 
     let html = "";
     let i = 0;
@@ -24,31 +24,21 @@ fDatabase.ref('Detections').on('value', (list) => {
                     ${i}
                 </td>
                 <td>
-                    <img src="${data.photo ?? '../../assets/images/logo_face.jpg'} alt=""/>
-                </td>
-                <td>
-                    ${data.name ?? ''}
+                    ${data.name ?? '-'}
                 </td>
                 <td class="text-center">
-                    ${data.identity ?? ''}
+                    ${data.email ?? '-'}
                 </td>
-                <td class="text-center">
-                    ${data.gender ?? ''}
-                </td>
-                <td class="text-center">
-                    <label class="badge text-center ${data.accuracy > 66 ? 'badge-success' : data.accuracy > 33 ? 'badge-warning' : 'badge-danger' }">
-                        ${data.accuracy ?? '-'} %
+                <td class="text-center" style="display: inline-flex-1; gap: 4px;">
+                    <label class="badge text-center ${data.isActive == true ? 'badge-success' : 'badge-danger' }" onclick="onAdminActivate('${id}', ${data.isActive == true}, '${data.name}');" style="pointer: cursor;">
+                        ${data.isActive == true ? 'Activated' : 'Disabled'}
                     </label>
-                </td>
-                <td class="text-center">
-                    ${new Date(data.time).toString().substring(0, 24)}
-                </td>
-                <td class="text-center">
-                    <a class="btn btn-danger btn-sm font-weight-medium text-white"
-                       onclick="onReportDelete('${id}', '${data.name}');">
-                        <i class="fa fa-trash"></i>
-                        Delete
+                    <a class="badge text-center text-white badge-secondary hidden" href="../admin-edit/?id=${id}" style="pointer: cursor;">
+                        <i class="fa fa-edit"></i> <span>Edit</span>
                     </a>
+                    <label class="badge text-center badge-danger" onclick="onAdminDelete('${id}', ${data.isActive == true}, '${data.name}');" style="pointer: cursor;">
+                    <i class="fa fa-trash"></i> Delete
+                    </label>
                 </td>
             </tr>
         `;
@@ -93,27 +83,28 @@ fDatabase.ref('Detections').on('value', (list) => {
 
 });
 
-function onReportDelete(id, name) {
 
-    const isYes = confirm(`Do you want to DELETE "${name}" ?`);
+
+function onAdminActivate(id, isActive, name) {
+
+    const isYes = confirm(`Do you want to ${isActive == true ? 'DISABLE' : 'ACTIVATE'} Admin "${name}" ?`);
 
     if(isYes) {
     
-        fDatabase.ref('Detections/'+ id).remove();
+        fDatabase.ref('Admins/'+ id +'/isActive').set(!(isActive == true));
 
     }
 
 }
 
-function clearAllReports() {
 
-    const isYes = confirm(`Do you want to DELETE All Reports ?`);
+function onAdminDelete(id, isActive, name) {
+
+    const isYes = confirm(`Do you want to 'DELETE' Admin "${name}" ?`);
 
     if(isYes) {
     
-        fDatabase.ref('Detections').remove();
-
-        document.querySelector(".table-responsive").classList.remove("loader");
+        fDatabase.ref('Admins/'+ id).remove();
 
     }
 

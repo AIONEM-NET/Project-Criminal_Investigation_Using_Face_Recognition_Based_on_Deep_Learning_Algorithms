@@ -234,6 +234,8 @@ public class CCTVCameraActivity extends AppCompatActivity {
     private static final String CHANNEL_NAME = "CCTV Camera - Criminal Investigation";
     private static final String CHANNEL_DESC = "CCTV Camera - Criminal Investigation";
 
+    public static Ringtone ringtone;
+
     public static void sendNotification(Context context, int id, String title, String message) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -245,9 +247,13 @@ public class CCTVCameraActivity extends AppCompatActivity {
 
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-        Uri rawPathUri = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.danger);
-        Ringtone r = RingtoneManager.getRingtone(context, rawPathUri);
-        r.play();
+        if (ringtone == null) {
+            Uri rawPathUri = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.danger);
+            ringtone = RingtoneManager.getRingtone(context, rawPathUri);
+        }
+        if(!ringtone.isPlaying()) {
+            ringtone.play();
+        }
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context.getApplicationContext(), CHANNEL_ID)

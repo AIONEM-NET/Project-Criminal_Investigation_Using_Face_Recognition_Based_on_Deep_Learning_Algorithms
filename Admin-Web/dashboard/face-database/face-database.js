@@ -19,20 +19,59 @@ fDatabase.ref('Criminals').on('value', (list) => {
 
         i++;
         let html1 = `
-            <div class="col-4" style="padding: 10px 10px">
-                <div style="border: solid 2px #3f51b5; border-radius: 10px; height: max-content;">
-                    <div class="col-12">
-                        <img src="${data.photo}" alt="" style="width: 100%; height: 200px; object-fit: contain;"/>
+            <div class="col-12">
+                <div clas="col-12" style="margin-top: 10px">
+                    <h3 class="text-center" style="line-height: 20px; height: 20px; overflow: hidden;">
+                        ${i}. ${data.name}
+                    </h3>
+                </div>
+                <div clas="col-12" style="margin-top: 10px">
+                    <h3 class="text-center face-database-tracking ${data.isTracking ? data.isDetected ? 'wanted' : 'wanted' : ''}">
+                        ${data.isTracking ? data.isDetected ? 'WANTED' : 'WANTED' : '-'}
+                    </h3>
+                </div>
+                <div class="row col-12">
+                    <div class="col-4 face-database-1" style="padding: 10px 10px">
+                        <div style="border: solid 2px #3f51b5; border-radius: 10px; height: max-content;">
+                            <div class="col-12">
+                                <img src="${data.photo || ('../../assets/images/no-face-' + data.gender +".png").toLowerCase()}" alt="" style="width: 100%; height: 200px; object-fit: contain;"/>
+                            </div>
+                        </div>
                     </div>
-                    <div clas="col-12" style="margin-top: 10px">
-                        <h3 class="text-center" style="line-height: 20px; height: 20px; overflow: hidden;">
-                            ${i}. ${data.name}
-                        </h3>
+                    <div class="col-4 face-database-2" style="padding: 10px 10px">
+                        <div style="border: solid 2px #3f51b5; border-radius: 10px; height: max-content;">
+                            <div class="col-12">
+                                <img src="${data.photo || ('../../assets/images/no-face-' + data.gender +".png").toLowerCase()}" alt="" style="width: 100%; height: 200px; object-fit: contain;"/>
+                            </div>
+                        </div>
                     </div>
-                    <div clas="col-12" style="margin-top: 10px">
-                        <h3 class="text-center face-database-tracking ${data.isTracking ? data.isDetected ? 'wanted' : 'wanted' : ''}">
-                            ${data.isTracking ? data.isDetected ? 'WANTED' : 'WANTED' : '-'}
-                        </h3>
+                    <div class="col-4 face-database-3" style="padding: 10px 10px">
+                        <div style="border: solid 2px #3f51b5; border-radius: 10px; height: max-content;">
+                            <div class="col-12">
+                                <img src="${data.photo || ('../../assets/images/no-face-' + data.gender +".png").toLowerCase()}" alt="" style="width: 100%; height: 200px; object-fit: contain;"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 face-database-4" style="padding: 10px 10px">
+                        <div style="border: solid 2px #3f51b5; border-radius: 10px; height: max-content;">
+                            <div class="col-12">
+                                <img src="${data.photo || ('../../assets/images/no-face-' + data.gender +".png").toLowerCase()}" alt="" style="width: 100%; height: 200px; object-fit: contain;"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 face-database-5" style="padding: 10px 10px">
+                        <div style="border: solid 2px #3f51b5; border-radius: 10px; height: max-content;">
+                            <div class="col-12">
+                                <img src="${data.photo || ('../../assets/images/no-face-' + data.gender +".png").toLowerCase()}" alt="" style="width: 100%; height: 200px; object-fit: contain;"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 face-database-6" style="padding: 10px 10px">
+                        <div style="border: solid 2px #3f51b5; border-radius: 10px; height: max-content;">
+                            <div class="col-12">
+                                <img src="${data.photo5 || ('../../assets/images/no-face-' + data.gender +".png").toLowerCase()}" alt="" style="width: 100%; height: 200px; object-fit: contain;"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
