@@ -12,9 +12,6 @@ import criminal.investigation.agent.LoginActivity;
 
 public class SplashScreen extends AppCompatActivity {
 
-    boolean isAgent = true;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

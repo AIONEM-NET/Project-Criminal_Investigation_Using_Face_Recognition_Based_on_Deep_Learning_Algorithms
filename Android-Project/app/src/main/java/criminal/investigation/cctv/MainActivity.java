@@ -316,13 +316,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    int faceNo = 0;
+    String lastID = "";
+
     private void addFace() {
         {
 
             start = false;
 
+            faceNo = faceNo > 5 ? 0 : faceNo;
+
             alertDialog = new AlertDialog.Builder(context);
-            alertDialog.setTitle("Add Trained FACE to DataBase");
+            alertDialog.setTitle("Add Trained FACE to DataBase ("+ (faceNo + 1) +")");
 
             LinearLayout linearLayout = new LinearLayout(this);
             linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -460,6 +465,14 @@ public class MainActivity extends AppCompatActivity {
                     registered.put(name, result);
                     start = true;
 
+                    if(identity.equals(lastID)) {
+                        faceNo++;
+                    }else {
+                        faceNo = 0;
+                    }
+
+                    lastID = identity;
+
                     long time = Calendar.getInstance().getTime().getTime();
 
                     HashMap<String, Object> mapData = new HashMap<>();
@@ -494,13 +507,16 @@ public class MainActivity extends AppCompatActivity {
                             } else {
                                 photo = "";
                             }
-                            databaseReference.child("photo").setValue(photo);
+                            if(faceNo > 5) {
+                                faceNo = 0;
+
+                                name = "";
+                                identity = "";
+                                gender = "";
+                            }
+                            databaseReference.child("photo" +(faceNo > 0 ? faceNo : "")).setValue(photo);
                         }
                     });
-
-                    name = "";
-                    identity = "";
-                    gender = "";
 
                     dialog.dismiss();
 
@@ -1208,6 +1224,7 @@ public class MainActivity extends AppCompatActivity {
                 mapData.put("gender", recognition.getGender());
                 mapData.put("distance", distance);
                 mapData.put("accuracy", (int) accuracy);
+                mapData.put("photo", "");
                 mapData.put("time", time);
                 mapData.put("isRecognized", true);
 
