@@ -320,223 +320,222 @@ public class MainActivity extends AppCompatActivity {
     String lastID = "";
 
     private void addFace() {
-        {
 
-            start = false;
+        start = false;
 
-            faceNo = faceNo > 5 ? 0 : faceNo;
+        faceNo = faceNo > 5 ? 0 : faceNo;
 
-            alertDialog = new AlertDialog.Builder(context);
-            alertDialog.setTitle("Train FACE to DataBase ("+ (faceNo + 1) +")");
+        alertDialog = new AlertDialog.Builder(context);
+        alertDialog.setTitle("Train FACE to DataBase (" + (faceNo + 1) + ")");
 
-            LinearLayout linearLayout = new LinearLayout(this);
-            linearLayout.setOrientation(LinearLayout.VERTICAL);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT);
-            linearLayout.setLayoutParams(lp);
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        linearLayout.setLayoutParams(lp);
 
-            inputName = new EditText(MainActivity.this);
-            LinearLayout.LayoutParams lpInputName = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-            inputName.setLayoutParams(lpInputName);
+        inputName = new EditText(MainActivity.this);
+        LinearLayout.LayoutParams lpInputName = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        inputName.setLayoutParams(lpInputName);
 
-            inputID = new EditText(MainActivity.this);
-            LinearLayout.LayoutParams lpInputPhone = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-            inputID.setLayoutParams(lpInputPhone);
+        inputID = new EditText(MainActivity.this);
+        LinearLayout.LayoutParams lpInputPhone = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        inputID.setLayoutParams(lpInputPhone);
 
-            inputGender = new EditText(MainActivity.this);
-            LinearLayout.LayoutParams lpInputGender = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-            inputGender.setLayoutParams(lpInputGender);
+        inputGender = new EditText(MainActivity.this);
+        LinearLayout.LayoutParams lpInputGender = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        inputGender.setLayoutParams(lpInputGender);
 
-            CheckBox checkboxGenderMale = new CheckBox(MainActivity.this);
-            LinearLayout.LayoutParams lpInputGenderMale = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-            checkboxGenderMale.setLayoutParams(lpInputGenderMale);
+        CheckBox checkboxGenderMale = new CheckBox(MainActivity.this);
+        LinearLayout.LayoutParams lpInputGenderMale = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        checkboxGenderMale.setLayoutParams(lpInputGenderMale);
 
-            CheckBox checkboxGenderFemale = new CheckBox(MainActivity.this);
-            LinearLayout.LayoutParams lpInputGenderFemale = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-            checkboxGenderFemale.setLayoutParams(lpInputGenderFemale);
+        CheckBox checkboxGenderFemale = new CheckBox(MainActivity.this);
+        LinearLayout.LayoutParams lpInputGenderFemale = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        checkboxGenderFemale.setLayoutParams(lpInputGenderFemale);
 
-            linearLayout.addView(inputName);
-            linearLayout.addView(inputID);
-            linearLayout.addView(inputGender);
-            linearLayout.addView(checkboxGenderMale);
-            linearLayout.addView(checkboxGenderFemale);
+        linearLayout.addView(inputName);
+        linearLayout.addView(inputID);
+        linearLayout.addView(inputGender);
+        linearLayout.addView(checkboxGenderMale);
+        linearLayout.addView(checkboxGenderFemale);
 
-            alertDialog.setView(linearLayout);
+        alertDialog.setView(linearLayout);
 
 
-            inputName.setHint("Enter Person Name");
-            inputName.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
-            inputName.setText(name);
+        inputName.setHint("Enter Person Name");
+        inputName.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+        inputName.setText(name);
 
-            inputID.setHint("Enter Person ID Number");
-            inputID.setInputType(InputType.TYPE_CLASS_NUMBER);
-            inputID.setText(identity);
+        inputID.setHint("Enter Person ID Number");
+        inputID.setInputType(InputType.TYPE_CLASS_NUMBER);
+        inputID.setText(identity);
 
-            inputGender.setHint("Select Person Gender");
-            inputGender.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
-            inputGender.setText(gender);
-            inputGender.setEnabled(false);
+        inputGender.setHint("Select Person Gender");
+        inputGender.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
+        inputGender.setText(gender);
+        inputGender.setEnabled(false);
 
-            checkboxGenderMale.setText("MALE");
-            checkboxGenderMale.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                    if(isChecked) {
-                        checkboxGenderFemale.setChecked(false);
-                    }
+        checkboxGenderMale.setText("MALE");
+        checkboxGenderMale.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    checkboxGenderFemale.setChecked(false);
                 }
-            });
-
-            checkboxGenderFemale.setText("FEMALE");
-            checkboxGenderFemale.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                    if(isChecked) {
-                        checkboxGenderMale.setChecked(false);
-                    }
-                }
-            });
-
-            if("male".equalsIgnoreCase(gender)) {
-                checkboxGenderMale.setChecked(true);
-            } else if("female".equalsIgnoreCase(gender)) {
-                checkboxGenderFemale.setChecked(true);
             }
+        });
 
-
-            alertDialog.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                    name = inputName.getText().toString();
-                    identity = inputID.getText().toString();
-
-                    if(checkboxGenderMale.isChecked()) {
-                        inputGender.setText("MALE");
-                    } else if(checkboxGenderFemale.isChecked()) {
-                        inputGender.setText("FEMALE");
-                    }
-                    gender = inputGender.getText().toString();
-
-                    if (!name.contains(" ")) {
-                        Toast.makeText(MainActivity.this, "Enter a valid Name", Toast.LENGTH_LONG).show();
-                        inputName.setError("Invalid Name!");
-                        // alertDialog.show();
-                        return;
-                    }
-                    inputName.setError(null);
-
-                    if(identity.length() != 16) {
-                        Toast.makeText(MainActivity.this, "Enter a valid ID Number", Toast.LENGTH_LONG).show();
-                        inputID.setError("Invalid ID Number!");
-                        // alertDialog.show();
-                        return;
-                    }
-                    if (!identity.startsWith("119") && !identity.startsWith("120")) {
-                        Toast.makeText(MainActivity.this, "Enter a valid ID Number", Toast.LENGTH_LONG).show();
-                        inputID.setError("Invalid ID Number!");
-                        // alertDialog.show();
-                        return;
-                    }
-                    inputID.setError(null);
-
-                    if(gender.isEmpty()) {
-                        Toast.makeText(MainActivity.this, "Select Gender", Toast.LENGTH_LONG).show();
-                        inputGender.setError("Gender required!");
-                        // alertDialog.show();
-                        return;
-                    }
-                    inputGender.setError(null);
-
-                    Recognition result = new Recognition(identity, name, -1f, gender);
-                    result.setExtra(embeedings);
-
-                    registered.put(name, result);
-                    start = true;
-
-                    if(identity.equals(lastID)) {
-                        faceNo++;
-                    }else {
-                        faceNo = 0;
-                    }
-
-                    lastID = identity;
-
-                    long time = Calendar.getInstance().getTime().getTime();
-
-                    HashMap<String, Object> mapData = new HashMap<>();
-                    mapData.put("name", name);
-                    mapData.put("identity", identity);
-                    mapData.put("gender", gender);
-                    mapData.put("time", time);
-
-                    DatabaseReference databaseReference = firebaseDatabase.getReference("Criminals").child(identity);
-
-                    for(String key : mapData.keySet()) {
-                        Object value = mapData.get(key);
-                        databaseReference.child(key).setValue(value);
-                    }
-
-                    Bitmap bitmap = ((BitmapDrawable) face_preview.getDrawable()).getBitmap();
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                    byte[] data = baos.toByteArray();
-
-                    StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(("face-"+name+"-"+identity).replace(" ", "")+".jpg");
-
-                    UploadTask uploadTask = storageReference.putBytes(data);
-                    Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                        @Override
-                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                            return storageReference.getDownloadUrl();
-                        }
-                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Uri> task) {
-                            String photo = "";
-                            if (task.isSuccessful()) {
-                                Uri downloadUri = task.getResult();
-                                photo = String.valueOf(downloadUri);
-                            } else {
-                                photo = "";
-                            }
-                            if(faceNo > 5) {
-                                faceNo = 0;
-
-                                name = "";
-                                identity = "";
-                                gender = "";
-                            }
-                            databaseReference.child("photo" +(faceNo > 0 ? faceNo : "")).setValue(photo);
-                        }
-                    });
-
-                    dialog.dismiss();
-
-                    Toast.makeText(MainActivity.this, "Face Training saved to Database", Toast.LENGTH_LONG).show();
+        checkboxGenderFemale.setText("FEMALE");
+        checkboxGenderFemale.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    checkboxGenderMale.setChecked(false);
                 }
-            });
-            alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    start = true;
-                    dialog.cancel();
-                }
-            });
+            }
+        });
 
-            alertDialog.show();
+        if ("male".equalsIgnoreCase(gender)) {
+            checkboxGenderMale.setChecked(true);
+        } else if ("female".equalsIgnoreCase(gender)) {
+            checkboxGenderFemale.setChecked(true);
         }
+
+
+        alertDialog.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                name = inputName.getText().toString();
+                identity = inputID.getText().toString();
+
+                if (checkboxGenderMale.isChecked()) {
+                    inputGender.setText("MALE");
+                } else if (checkboxGenderFemale.isChecked()) {
+                    inputGender.setText("FEMALE");
+                }
+                gender = inputGender.getText().toString();
+
+                if (!name.contains(" ")) {
+                    Toast.makeText(MainActivity.this, "Enter a valid Name", Toast.LENGTH_LONG).show();
+                    inputName.setError("Invalid Name!");
+                    // alertDialog.show();
+                    return;
+                }
+                inputName.setError(null);
+
+                if (identity.length() != 16) {
+                    Toast.makeText(MainActivity.this, "Enter a valid ID Number", Toast.LENGTH_LONG).show();
+                    inputID.setError("Invalid ID Number!");
+                    // alertDialog.show();
+                    return;
+                }
+                if (!identity.startsWith("119") && !identity.startsWith("120")) {
+                    Toast.makeText(MainActivity.this, "Enter a valid ID Number", Toast.LENGTH_LONG).show();
+                    inputID.setError("Invalid ID Number!");
+                    // alertDialog.show();
+                    return;
+                }
+                inputID.setError(null);
+
+                if (gender.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Select Gender", Toast.LENGTH_LONG).show();
+                    inputGender.setError("Gender required!");
+                    // alertDialog.show();
+                    return;
+                }
+                inputGender.setError(null);
+
+                Recognition result = new Recognition(identity, name, -1f, gender);
+                result.setExtra(embeedings);
+
+                registered.put(name, result);
+                start = true;
+
+                if (identity.equals(lastID)) {
+                    faceNo++;
+                } else {
+                    faceNo = 0;
+                }
+
+                lastID = identity;
+
+                long time = Calendar.getInstance().getTime().getTime();
+
+                HashMap<String, Object> mapData = new HashMap<>();
+                mapData.put("name", name);
+                mapData.put("identity", identity);
+                mapData.put("gender", gender);
+                mapData.put("time", time);
+
+                DatabaseReference databaseReference = firebaseDatabase.getReference("Criminals").child(identity);
+
+                for (String key : mapData.keySet()) {
+                    Object value = mapData.get(key);
+                    databaseReference.child(key).setValue(value);
+                }
+
+                Bitmap bitmap = ((BitmapDrawable) face_preview.getDrawable()).getBitmap();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] data = baos.toByteArray();
+
+                StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(("face-" + name + "-" + identity).replace(" ", "") + ".jpg");
+
+                UploadTask uploadTask = storageReference.putBytes(data);
+                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        return storageReference.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        String photo = "";
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
+                            photo = String.valueOf(downloadUri);
+                        } else {
+                            photo = "";
+                        }
+                        if (faceNo > 5) {
+                            faceNo = 0;
+
+                            name = "";
+                            identity = "";
+                            gender = "";
+                        }
+                        databaseReference.child("photo" + (faceNo > 0 ? faceNo : "")).setValue(photo);
+                    }
+                });
+
+                dialog.dismiss();
+
+                Toast.makeText(MainActivity.this, "Face Training saved to Database", Toast.LENGTH_LONG).show();
+            }
+        });
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                start = true;
+                dialog.cancel();
+            }
+        });
+
+        alertDialog.show();
+
     }
 
     private  void clearnameList()
