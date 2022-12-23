@@ -41,28 +41,28 @@ fDatabase.ref('Criminals').on('value', (list) => {
                     <div class="col-4 face-database-2" style="padding: 10px 10px">
                         <div style="border: solid 2px #3f51b5; border-radius: 10px; height: max-content;">
                             <div class="col-12">
-                                <img src="${data.photo || ('../../assets/images/no-face-' + data.gender +".png").toLowerCase()}" alt="" style="width: 100%; height: 200px; object-fit: contain;"/>
+                                <img src="${data.photo1 || ('../../assets/images/no-face-' + data.gender +".png").toLowerCase()}" alt="" style="width: 100%; height: 200px; object-fit: contain;"/>
                             </div>
                         </div>
                     </div>
                     <div class="col-4 face-database-3" style="padding: 10px 10px">
                         <div style="border: solid 2px #3f51b5; border-radius: 10px; height: max-content;">
                             <div class="col-12">
-                                <img src="${data.photo || ('../../assets/images/no-face-' + data.gender +".png").toLowerCase()}" alt="" style="width: 100%; height: 200px; object-fit: contain;"/>
+                                <img src="${data.photo2 || ('../../assets/images/no-face-' + data.gender +".png").toLowerCase()}" alt="" style="width: 100%; height: 200px; object-fit: contain;"/>
                             </div>
                         </div>
                     </div>
                     <div class="col-4 face-database-4" style="padding: 10px 10px">
                         <div style="border: solid 2px #3f51b5; border-radius: 10px; height: max-content;">
                             <div class="col-12">
-                                <img src="${data.photo || ('../../assets/images/no-face-' + data.gender +".png").toLowerCase()}" alt="" style="width: 100%; height: 200px; object-fit: contain;"/>
+                                <img src="${data.photo3 || ('../../assets/images/no-face-' + data.gender +".png").toLowerCase()}" alt="" style="width: 100%; height: 200px; object-fit: contain;"/>
                             </div>
                         </div>
                     </div>
                     <div class="col-4 face-database-5" style="padding: 10px 10px">
                         <div style="border: solid 2px #3f51b5; border-radius: 10px; height: max-content;">
                             <div class="col-12">
-                                <img src="${data.photo || ('../../assets/images/no-face-' + data.gender +".png").toLowerCase()}" alt="" style="width: 100%; height: 200px; object-fit: contain;"/>
+                                <img src="${data.photo4 || ('../../assets/images/no-face-' + data.gender +".png").toLowerCase()}" alt="" style="width: 100%; height: 200px; object-fit: contain;"/>
                             </div>
                         </div>
                     </div>
