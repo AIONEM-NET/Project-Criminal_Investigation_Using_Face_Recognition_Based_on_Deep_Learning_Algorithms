@@ -327,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
             faceNo = faceNo > 5 ? 0 : faceNo;
 
             alertDialog = new AlertDialog.Builder(context);
-            alertDialog.setTitle("Add Trained FACE to DataBase ("+ (faceNo + 1) +")");
+            alertDialog.setTitle("Train FACE to DataBase ("+ (faceNo + 1) +")");
 
             LinearLayout linearLayout = new LinearLayout(this);
             linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -482,7 +482,11 @@ public class MainActivity extends AppCompatActivity {
                     mapData.put("time", time);
 
                     DatabaseReference databaseReference = firebaseDatabase.getReference("Criminals").child(identity);
-                    databaseReference.setValue(mapData);
+
+                    for(String key : mapData.keySet()) {
+                        Object value = mapData.get(key);
+                        databaseReference.child(key).setValue(value);
+                    }
 
                     Bitmap bitmap = ((BitmapDrawable) face_preview.getDrawable()).getBitmap();
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
