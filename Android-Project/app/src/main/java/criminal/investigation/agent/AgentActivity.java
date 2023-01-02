@@ -171,7 +171,7 @@ public class AgentActivity extends AppCompatActivity {
 
                 }else {
 
-                    txtLocation.setText("You don't have Access");
+                    txtLocation.setText("You don't have Location Access");
                     txtName.setText("");
                     txtIdentity.setText("");
                     txtGender.setText("");

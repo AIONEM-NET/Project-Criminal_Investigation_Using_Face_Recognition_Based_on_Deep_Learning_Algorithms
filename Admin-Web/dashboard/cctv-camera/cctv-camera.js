@@ -30,6 +30,11 @@ function startCCTVCamera() {
       const id = item.key;
       let data = item.val();
 
+      
+      document.querySelector(".cctv-district").value = data.district ?? "";
+      document.querySelector(".cctv-location").value = data.location ?? "";
+      document.querySelector(".cctv-time").innerHTML = new Date(data.time).toString().substring(0, 24);
+
       const criminal = criminals[data.identity] || {};
 
       if(!criminal.isTracking) {
@@ -44,14 +49,11 @@ function startCCTVCamera() {
 
       }
 
-      document.querySelector(".cctv-district").value = data.district ?? "";
-      document.querySelector(".cctv-location").value = data.location ?? "";
       document.querySelector(".cctv-image").src = data.photo ?? "../../assets/images/face_scan_1.gif";
       document.querySelector(".cctv-name").innerHTML = data.name ?? "-";
       document.querySelector(".cctv-gender").innerHTML = data.gender ?? "-";
       document.querySelector(".cctv-identity").innerHTML = data.identity ?? "'";
       document.querySelector(".cctv-accuracy").innerHTML = (data.accuracy ?? "-") +" %";
-      document.querySelector(".cctv-time").innerHTML = new Date(data.time).toString().substring(0, 24);
 
       document.querySelector(".cctv-div").classList.remove("loader");
     }
