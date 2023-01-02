@@ -1,4 +1,4 @@
-package criminal.investigation.cctv;
+package criminal.investigation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import criminal.investigation.agent.LoginActivity;
+import criminal.investigation.cctv.R;
 
 
 public class SplashScreen extends AppCompatActivity {

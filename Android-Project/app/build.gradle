@@ -7,8 +7,8 @@ android {
     compileSdkVersion 32
     buildToolsVersion "32.0.0"
     defaultConfig {
-        applicationId "criminal.investigation.cctv"
-        // applicationId "criminal.investigation.agent"
+        // applicationId "criminal.investigation.cctv"
+        applicationId "criminal.investigation.agent"
         minSdkVersion 21
         targetSdkVersion 32
         versionCode 100

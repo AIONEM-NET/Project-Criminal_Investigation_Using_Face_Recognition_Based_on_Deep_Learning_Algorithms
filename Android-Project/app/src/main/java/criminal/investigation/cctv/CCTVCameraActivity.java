@@ -42,6 +42,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.common.util.concurrent.ListenableFuture;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -64,6 +65,8 @@ import android.os.ParcelFileDescriptor;
 import android.text.InputType;
 import android.util.Pair;
 import android.util.Size;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.Button;
@@ -96,8 +99,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import criminal.investigation.LoginActivity;
 
-public class MainActivity extends AppCompatActivity {
+
+public class CCTVCameraActivity extends AppCompatActivity {
 
     FaceDetector detector;
 
@@ -111,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     CameraSelector cameraSelector;
     boolean start = true,flipX=false;
     boolean isRecognizing = true;
-    Context context=MainActivity.this;
+    Context context= CCTVCameraActivity.this;
     int cam_face=CameraSelector.LENS_FACING_BACK; //Default Back Camera
 
     int[] intValues;
@@ -139,9 +144,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //Load saved faces from memory when app starts
         registered = readFromSP();
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_cctv_camera);
 
         firebaseDatabase = FirebaseDatabase.getInstance("https://criminal-investigation-face-default-rtdb.firebaseio.com");
+
+        setSupportActionBar(findViewById(R.id.button3));
 
         face_preview =findViewById(R.id.imageView);
         reco_name =findViewById(R.id.textView);
@@ -277,7 +284,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Load model
         try {
-            tfLite=new Interpreter(loadModelFile(MainActivity.this,modelFile));
+            tfLite=new Interpreter(loadModelFile(CCTVCameraActivity.this,modelFile));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -316,6 +323,30 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar_cctv, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.action_logout) {
+            logout();
+            return false;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void logout() {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+
     int faceNo = 0;
     String lastID = "";
 
@@ -335,31 +366,31 @@ public class MainActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT);
         linearLayout.setLayoutParams(lp);
 
-        inputName = new EditText(MainActivity.this);
+        inputName = new EditText(CCTVCameraActivity.this);
         LinearLayout.LayoutParams lpInputName = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         inputName.setLayoutParams(lpInputName);
 
-        inputID = new EditText(MainActivity.this);
+        inputID = new EditText(CCTVCameraActivity.this);
         LinearLayout.LayoutParams lpInputPhone = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         inputID.setLayoutParams(lpInputPhone);
 
-        inputGender = new EditText(MainActivity.this);
+        inputGender = new EditText(CCTVCameraActivity.this);
         LinearLayout.LayoutParams lpInputGender = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         inputGender.setLayoutParams(lpInputGender);
 
-        CheckBox checkboxGenderMale = new CheckBox(MainActivity.this);
+        CheckBox checkboxGenderMale = new CheckBox(CCTVCameraActivity.this);
         LinearLayout.LayoutParams lpInputGenderMale = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         checkboxGenderMale.setLayoutParams(lpInputGenderMale);
 
-        CheckBox checkboxGenderFemale = new CheckBox(MainActivity.this);
+        CheckBox checkboxGenderFemale = new CheckBox(CCTVCameraActivity.this);
         LinearLayout.LayoutParams lpInputGenderFemale = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -429,7 +460,7 @@ public class MainActivity extends AppCompatActivity {
                 gender = inputGender.getText().toString();
 
                 if (!name.contains(" ")) {
-                    Toast.makeText(MainActivity.this, "Enter a valid Name", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CCTVCameraActivity.this, "Enter a valid Name", Toast.LENGTH_LONG).show();
                     inputName.setError("Invalid Name!");
                     // alertDialog.show();
                     return;
@@ -437,13 +468,13 @@ public class MainActivity extends AppCompatActivity {
                 inputName.setError(null);
 
                 if (identity.length() != 16) {
-                    Toast.makeText(MainActivity.this, "Enter a valid ID Number", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CCTVCameraActivity.this, "Enter a valid ID Number", Toast.LENGTH_LONG).show();
                     inputID.setError("Invalid ID Number!");
                     // alertDialog.show();
                     return;
                 }
                 if (!identity.startsWith("119") && !identity.startsWith("120")) {
-                    Toast.makeText(MainActivity.this, "Enter a valid ID Number", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CCTVCameraActivity.this, "Enter a valid ID Number", Toast.LENGTH_LONG).show();
                     inputID.setError("Invalid ID Number!");
                     // alertDialog.show();
                     return;
@@ -451,7 +482,7 @@ public class MainActivity extends AppCompatActivity {
                 inputID.setError(null);
 
                 if (gender.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Select Gender", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CCTVCameraActivity.this, "Select Gender", Toast.LENGTH_LONG).show();
                     inputGender.setError("Gender required!");
                     // alertDialog.show();
                     return;
@@ -523,7 +554,7 @@ public class MainActivity extends AppCompatActivity {
 
                 dialog.dismiss();
 
-                Toast.makeText(MainActivity.this, "Face Training saved to Database", Toast.LENGTH_LONG).show();
+                Toast.makeText(CCTVCameraActivity.this, "Face Training saved to Database", Toast.LENGTH_LONG).show();
             }
         });
         alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

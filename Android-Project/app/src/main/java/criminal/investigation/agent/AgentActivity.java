@@ -38,9 +38,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.InputStream;
 import java.util.Date;
 
+import criminal.investigation.LoginActivity;
 import criminal.investigation.cctv.R;
 
-public class CCTVCameraActivity extends AppCompatActivity {
+public class AgentActivity extends AppCompatActivity {
 
     String myDistrict = "";
 
@@ -49,12 +50,12 @@ public class CCTVCameraActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cctv_camera);
+        setContentView(R.layout.activity_agent);
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (firebaseUser == null) {
-            Intent intent = new Intent(CCTVCameraActivity.this, LoginActivity.class);
+            Intent intent = new Intent(AgentActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
             return;
@@ -75,7 +76,7 @@ public class CCTVCameraActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(CCTVCameraActivity.this, ReportsActivity.class);
+                Intent intent = new Intent(AgentActivity.this, ReportsActivity.class);
                 startActivity(intent);
 
             }
@@ -101,15 +102,6 @@ public class CCTVCameraActivity extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(district) || district.equalsIgnoreCase(myDistrict)) {
 
-                    txtLocation.setText((!TextUtils.isEmpty(district) ? district : "All") +" : "+ location);
-                    txtName.setText(name);
-                    txtIdentity.setText(identity);
-                    txtGender.setText(gender);
-                    txtTime.setText(new Date(time).toString());
-                    txtAccuracy.setText(accuracy + " %");
-
-                    new DownloadImageTask(imgFace).execute(photo);
-
                     if (isRecognized) {
 
                         FirebaseDatabase.getInstance().getReference("Criminals").child(identity).addValueEventListener(new ValueEventListener() {
@@ -121,13 +113,22 @@ public class CCTVCameraActivity extends AppCompatActivity {
 
                                 if (isTracking) {
 
+                                    txtLocation.setText((!TextUtils.isEmpty(district) ? district : "All") +" : "+ location);
+                                    txtName.setText(name);
+                                    txtIdentity.setText(identity);
+                                    txtGender.setText(gender);
+                                    txtTime.setText(new Date(time).toString());
+                                    txtAccuracy.setText(accuracy + " %");
+
+                                    new DownloadImageTask(imgFace).execute(photo);
+
                                     txtAccuracy.setText(accuracy + " %" + " | " + (isCaught ? "is Caught" : "is Detected"));
 
                                     if (timeInterval < 1 * 60 * 1000) {
 
                                         if (isCaught) {
 
-                                            sendNotification(CCTVCameraActivity.this,
+                                            sendNotification(AgentActivity.this,
                                                     (identity + "Caught").hashCode(),
                                                     name + " is Caught",
                                                     identity + " - " + gender + " - " + accuracy + " %"
@@ -135,7 +136,7 @@ public class CCTVCameraActivity extends AppCompatActivity {
 
                                         } else {
 
-                                            sendNotification(CCTVCameraActivity.this,
+                                            sendNotification(AgentActivity.this,
                                                     (identity + "Detected").hashCode(),
                                                     name + "'s Face Detected" + " at " + district +" : "+ location,
                                                     identity + " - " + gender + " - " + accuracy + " %"
@@ -144,6 +145,17 @@ public class CCTVCameraActivity extends AppCompatActivity {
                                         }
 
                                     }
+
+                                }else {
+
+                                    txtLocation.setText("");
+                                    txtName.setText("");
+                                    txtIdentity.setText("");
+                                    txtGender.setText("");
+                                    txtTime.setText("");
+                                    txtAccuracy.setText("");
+
+                                    new DownloadImageTask(imgFace).execute("");
 
                                 }
 
@@ -180,7 +192,7 @@ public class CCTVCameraActivity extends AppCompatActivity {
 
         };
 
-        txtLocation.setText("Account deleted");
+        txtLocation.setText("----");
         txtLocation.setBackgroundColor(Color.parseColor("#FF0000"));
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("CCTV-Camera");
@@ -203,7 +215,7 @@ public class CCTVCameraActivity extends AppCompatActivity {
 
                     databaseReference.removeEventListener(valueEventListener);
 
-                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(CCTVCameraActivity.this);
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(AgentActivity.this);
 
                     notificationManager.cancelAll();
 
@@ -251,7 +263,10 @@ public class CCTVCameraActivity extends AppCompatActivity {
             Uri rawPathUri = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.danger);
             ringtone = RingtoneManager.getRingtone(context, rawPathUri);
         }
-        if(!ringtone.isPlaying()) {
+
+        ringtone.stop();
+
+        if(true || !ringtone.isPlaying()) {
             ringtone.play();
         }
 
@@ -260,7 +275,7 @@ public class CCTVCameraActivity extends AppCompatActivity {
                 .setSmallIcon(R.drawable.logo_rib)
                 .setContentTitle(title)
                 .setContentText(message)
-                // .setSound(soundUri)
+                 .setSound(soundUri)
                 .setPriority(NotificationCompat.PRIORITY_HIGH);
 
         notificationManager.notify(id, builder.build());
@@ -277,17 +292,23 @@ public class CCTVCameraActivity extends AppCompatActivity {
         protected Bitmap doInBackground(String... urls) {
             String url = urls[0];
             Bitmap bitmap = null;
-            try {
-                InputStream inputStream = new java.net.URL(url).openStream();
-                bitmap = BitmapFactory.decodeStream(inputStream);
-            } catch (Exception e) {
-                e.printStackTrace();
+            if(!TextUtils.isEmpty(url)) {
+                try {
+                    InputStream inputStream = new java.net.URL(url).openStream();
+                    bitmap = BitmapFactory.decodeStream(inputStream);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             return bitmap;
         }
 
         protected void onPostExecute(Bitmap result) {
-            imageView.setImageBitmap(result);
+            if(result != null) {
+                imageView.setImageBitmap(result);
+            }else {
+                imageView.setImageResource(R.drawable.logo_face);
+            }
         }
 
     }

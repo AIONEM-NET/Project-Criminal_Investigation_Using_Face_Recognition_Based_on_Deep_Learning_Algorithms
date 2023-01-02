@@ -4,7 +4,7 @@ if(!userID) {
 }
 
 
-document.querySelector(".fuser-name").innerHTML = userName;
+// document.querySelector(".fuser-name").innerHTML = userName;
 
 
 if(userAccount == "SuperAdmin") {

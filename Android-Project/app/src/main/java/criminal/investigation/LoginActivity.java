@@ -1,4 +1,4 @@
-package criminal.investigation.agent;
+package criminal.investigation;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -21,9 +21,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import criminal.investigation.cctv.MainActivity;
+import criminal.investigation.agent.AgentActivity;
+import criminal.investigation.cctv.CCTVCameraActivity;
 import criminal.investigation.cctv.R;
-import criminal.investigation.cctv.SplashScreen;
 
 
 public class LoginActivity extends Activity {
@@ -41,11 +41,11 @@ public class LoginActivity extends Activity {
 
             if(isAgentApp) {
 
-                Intent intent = new Intent(LoginActivity.this, CCTVCameraActivity.class);
+                Intent intent = new Intent(LoginActivity.this, AgentActivity.class);
                 startActivity(intent);
 
             }else {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, CCTVCameraActivity.class);
                 startActivity(intent);
             }
 
@@ -112,7 +112,7 @@ public class LoginActivity extends Activity {
 
                                     Toast.makeText(getApplicationContext(), "Login successfully", Toast.LENGTH_LONG).show();
 
-                                    Intent intent = new Intent(LoginActivity.this, CCTVCameraActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, AgentActivity.class);
                                     startActivity(intent);
                                     finish();
 
@@ -120,7 +120,7 @@ public class LoginActivity extends Activity {
 
                                     Toast.makeText(getApplicationContext(), "Login successfully", Toast.LENGTH_LONG).show();
 
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, CCTVCameraActivity.class);
                                     startActivity(intent);
                                     finish();
 
