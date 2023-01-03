@@ -29,6 +29,7 @@ import androidx.annotation.NonNull;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageProxy;
@@ -111,7 +112,8 @@ public class CCTVCameraActivity extends AppCompatActivity {
     ImageView face_preview;
     Interpreter tfLite;
     TextView reco_name,preview_info;
-    Button recognize,camera_switch, actions;
+    Toolbar recognize; //Button recognize
+    Button camera_switch, actions;
     ImageButton add_face;
     CameraSelector cameraSelector;
     boolean start = true,flipX=false;
@@ -205,7 +207,8 @@ public class CCTVCameraActivity extends AppCompatActivity {
                             case 6:
 
                                 isRecognizing = false;
-                                recognize.setText("SAVE Face To Database");
+                                // recognize.setText("SAVE Face To Database");
+                                recognize.setTitle("SAVE Face To Database");
                                 add_face.setVisibility(View.VISIBLE);
                                 reco_name.setVisibility(View.GONE);
                                 face_preview.setVisibility(View.VISIBLE);
@@ -218,7 +221,8 @@ public class CCTVCameraActivity extends AppCompatActivity {
 
                                 isRecognizing = true;
                                 start = true;
-                                recognize.setText("FACE RECOGNITION | CCTV CAMERA");
+                                // recognize.setText("FACE RECOGNITION | CCTV CAMERA");
+                                recognize.setTitle("FACE RECOGNITION | CCTV CAMERA");
                                 add_face.setVisibility(View.GONE);
                                 reco_name.setVisibility(View.VISIBLE);
                                 face_preview.setVisibility(View.GONE);
@@ -275,10 +279,12 @@ public class CCTVCameraActivity extends AppCompatActivity {
         recognize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!recognize.getText().toString().equalsIgnoreCase("FACE RECOGNITION | CCTV CAMERA")) {
+//                if (!recognize.getText().toString().equalsIgnoreCase("FACE RECOGNITION | CCTV CAMERA")) {
+//                    addFace();
+//                }
+                if (!recognize.getTitle().toString().equalsIgnoreCase("FACE RECOGNITION | CCTV CAMERA")) {
                     addFace();
                 }
-
             }
         });
 
@@ -1156,7 +1162,8 @@ public class CCTVCameraActivity extends AppCompatActivity {
 
                             if(faces.size()!=0) {
                                 isRecognizing = false;
-                                recognize.setText("RECOGNIZED FACE");
+                                // recognize.setText("RECOGNIZED FACE");
+                                recognize.setTitle("RECOGNIZED FACE");
                                 add_face.setVisibility(View.VISIBLE);
                                 reco_name.setVisibility(View.GONE);
                                 face_preview.setVisibility(View.VISIBLE);
