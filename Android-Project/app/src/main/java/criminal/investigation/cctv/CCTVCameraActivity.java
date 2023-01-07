@@ -44,8 +44,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -139,6 +142,9 @@ public class CCTVCameraActivity extends AppCompatActivity {
     private HashMap<String, Recognition> registered = new HashMap<>();
 
     private FirebaseDatabase firebaseDatabase;
+
+    String cctvDistrict = "";
+    String cctvLocation = "";
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -303,7 +309,20 @@ public class CCTVCameraActivity extends AppCompatActivity {
 
         cameraBind();
 
+        FirebaseDatabase.getInstance().getReference("CCTV-Camera").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot data) {
 
+                cctvDistrict = data.hasChild("district") ? String.valueOf(data.child("district").getValue()) : "";
+                cctvLocation = data.hasChild("location") ? String.valueOf(data.child("location").getValue()) : "";
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 
@@ -1268,6 +1287,8 @@ public class CCTVCameraActivity extends AppCompatActivity {
                 mapData.put("photo", "");
                 mapData.put("time", time);
                 mapData.put("isRecognized", true);
+                mapData.put("district", cctvDistrict);
+                mapData.put("location", cctvLocation);
 
                 DatabaseReference databaseReferenceDetections = firebaseDatabase.getReference("Detections").push();
 

@@ -41,6 +41,9 @@ fDatabase.ref('Detections').on('value', (list) => {
                     </label>
                 </td>
                 <td class="text-center">
+                    ${data.district ?? ''} ${data.location ?? ''}
+                </td>
+                <td class="text-center">
                     ${new Date(data.time).toString().substring(0, 24)}
                 </td>
                 <td class="text-center">
