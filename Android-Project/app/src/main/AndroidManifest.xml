@@ -24,7 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="criminal.investigation.cctv.CCTVCameraActivity"
+        <activity
+            android:name="criminal.investigation.cctv.CCTVCameraActivity"
             android:theme="@style/Theme.FaceRecognition.Fullscreen"/>
         <activity android:name="criminal.investigation.LoginActivity" />
         <activity android:name="criminal.investigation.agent.AgentActivity" />
