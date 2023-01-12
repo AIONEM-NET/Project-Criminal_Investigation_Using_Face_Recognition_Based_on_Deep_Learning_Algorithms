@@ -28,6 +28,8 @@ fDatabase.ref('Criminals').on('value', (list) => {
         const id = item.key;
         const data = item.val();
 
+        if(!data.identity) return;
+
         noCriminals++;
 
         if(data.isTracking == true) {
