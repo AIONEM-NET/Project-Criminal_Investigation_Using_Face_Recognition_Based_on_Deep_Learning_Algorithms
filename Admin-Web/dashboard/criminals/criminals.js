@@ -17,6 +17,8 @@ fDatabase.ref('Criminals').on('value', (list) => {
         const id = item.key;
         const data = item.val();
 
+        if(!data.identity) return;
+
         i++;
         let html1 = `
             <tr>
@@ -36,7 +38,7 @@ fDatabase.ref('Criminals').on('value', (list) => {
                     ${data.gender ?? '-'}
                 </td>
                 <td class="text-center">
-                    ${new Date(data.time).toString().substring(0, 24)}
+                    ${data.time ? new Date(data.time).toString().substring(0, 24) : '-'}
                 </td>
                 <td class="text-center">
                     <a class="btn btn-danger btn-sm font-weight-medium text-white"

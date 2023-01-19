@@ -17,6 +17,8 @@ fDatabase.ref('Criminals').on('value', (list) => {
         const id = item.key;
         const data = item.val();
 
+        if(!data.identity) return;
+
         i++;
         let html1 = `
             <div class="col-12">

@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "criminal-investigation-using-face-recognition",
     "public": "Admin-Web",
     "ignore": [
       "firebase.json",
